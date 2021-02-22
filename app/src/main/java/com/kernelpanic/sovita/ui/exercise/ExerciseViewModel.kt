@@ -1,13 +1,13 @@
-package com.kernelpanic.sovita.ui.notifications
+package com.kernelpanic.sovita.ui.exercise
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class ExerciseViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is exercise Fragment"
     }
     val text: LiveData<String> = _text
 }

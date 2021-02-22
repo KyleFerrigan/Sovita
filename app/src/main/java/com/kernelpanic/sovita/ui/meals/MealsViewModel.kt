@@ -1,13 +1,12 @@
-package com.kernelpanic.sovita.ui.dashboard
+package com.kernelpanic.sovita.ui.meals
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
-
+class MealsViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is meals Fragment"
     }
     val text: LiveData<String> = _text
 }
