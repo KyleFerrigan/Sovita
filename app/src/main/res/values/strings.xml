@@ -7,4 +7,7 @@
     <string name="exercise_summary">Exercise Summary</string>
     <string name="social_summary">Social Summary</string>
     <string name="meals_summary">Meals Summary</string>
+    <string name="exercise_new">New Exercise</string>
+    <string name="exercise_recent">Recent Exercises</string>
+    <string name="exercise_saved">Saved Exercises</string>
 </resources>
