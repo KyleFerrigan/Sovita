@@ -16,16 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
             <TextView
                 android:id="@+id/exercise_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="26dp"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                android:text="Recent Meals" />
+                android:text="Recent Exercises" />
+            <TextView
+                android:id="@+id/exercise_saved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="26dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Saved Exercises" />
+            <TextView
+                android:id="@+id/exercise_popular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="26dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Popular Exercises" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
