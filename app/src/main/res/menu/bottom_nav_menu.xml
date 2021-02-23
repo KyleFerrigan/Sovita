@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_chat"
         android:icon="@drawable/ic_chat"
-        android:title="@string/title_chat" /> <!--TODO Change to chat icon-->
+        android:title="@string/title_chat" />
 
     <item
         android:id="@+id/navigation_meals"
