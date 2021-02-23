@@ -4,4 +4,7 @@
     <string name="title_exercise">Exercise</string>
     <string name="title_chat">Chat</string>
     <string name="title_nutrition">Nutrition</string>
+    <string name="exercise_summary">Exercise Summary</string>
+    <string name="social_summary">Social Summary</string>
+    <string name="meals_summary">Meals Summary</string>
 </resources>
