@@ -78,6 +78,6 @@
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/FabExHomeDesc" />
+        android:contentDescription="@string/exHomeFabDesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

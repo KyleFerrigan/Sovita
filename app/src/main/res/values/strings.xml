@@ -11,5 +11,7 @@
     <string name="recent_exercises">Recent Exercises</string>
     <string name="popular_exercises">Popular Exercises</string>
     <string name="saved_exercises">Saved Exercises</string>
-    <string name="FabExHomeDesc">Add Workout</string>
+    <string name="exHomeFabDesc">Add Workout</string>
+    <string name="mealsHomeFabDesc">Add Meal</string>
+    <string name="chatHomeFabDesc">Start new chat</string>
 </resources>
