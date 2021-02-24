@@ -26,9 +26,7 @@ class ExerciseFragment : Fragment() {
         exerciseViewModel =
                 ViewModelProvider(this).get(ExerciseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_exercise, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
         exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
         })
         return root
 
