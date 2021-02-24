@@ -10,4 +10,10 @@
     <string name="meals_summary">Meals Summary</string>
     <string name="exercise_1">Bicep Curls</string>
     <string name="catagory_arms">Arms</string>
+    <string name="recent_exercises">Recent Exercises</string>
+    <string name="popular_exercises">Popular Exercises</string>
+    <string name="saved_exercises">Saved Exercises</string>
+    <string name="exHomeFabDesc">Add Workout</string>
+    <string name="mealsHomeFabDesc">Add Meal</string>
+    <string name="chatHomeFabDesc">Start new chat</string>
 </resources>
