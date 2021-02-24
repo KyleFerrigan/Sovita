@@ -11,4 +11,5 @@
     <string name="exercise_new">New Exercise</string>
     <string name="exercise_recent">Recent Exercises</string>
     <string name="exercise_saved">Saved Exercises</string>
+    <string name="title_activity_exercise_begin">MainActivity</string>
 </resources>
