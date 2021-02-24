@@ -8,4 +8,8 @@
     <string name="exercise_summary">Exercise Summary</string>
     <string name="social_summary">Social Summary</string>
     <string name="meals_summary">Meals Summary</string>
+    <string name="recent_exercises">Recent Exercises</string>
+    <string name="popular_exercises">Popular Exercises</string>
+    <string name="saved_exercises">Saved Exercises</string>
+    <string name="FabExHomeDesc">Add Workout</string>
 </resources>
