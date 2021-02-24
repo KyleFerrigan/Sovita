@@ -8,4 +8,6 @@
     <string name="exercise_summary">Exercise Summary</string>
     <string name="social_summary">Social Summary</string>
     <string name="meals_summary">Meals Summary</string>
+    <string name="exercise_1">Bicep Curls</string>
+    <string name="catagory_arms">Arms</string>
 </resources>
