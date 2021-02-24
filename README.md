@@ -1,2 +1,3 @@
-# Sovita
-Sovita App: Written in Kotlin
+# Sovita Android App
+"Forge your workout"
+Written in Kotlin
