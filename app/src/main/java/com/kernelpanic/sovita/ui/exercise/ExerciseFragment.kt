@@ -11,13 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.kernelpanic.sovita.Exercise
 import com.kernelpanic.sovita.R
 import com.kernelpanic.sovita.Workout
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 class ExerciseFragment : Fragment() {
     private lateinit var exerciseViewModel: ExerciseViewModel
     private lateinit var workouts: Workout
     private lateinit var exercises: Exercise
     private lateinit var exerciseTextView: TextView
-
+    private lateinit var addWorkoutButton: Button
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -30,6 +32,7 @@ class ExerciseFragment : Fragment() {
         })
         return root
 
+    
 
 
     }
