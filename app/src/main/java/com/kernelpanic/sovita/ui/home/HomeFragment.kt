@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kernelpanic.sovita.R
 
@@ -21,9 +22,9 @@ class HomeFragment : Fragment() {
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        homeViewModel.text.observe(viewLifecycleOwner, {
-
+        homeViewModel.text.observe(viewLifecycleOwner, Observer {
         })
+
         return root
     }
 }
