@@ -21,8 +21,8 @@ import com.kernelpanic.sovita.Workout
 
 class ExerciseFragment: Fragment()  {
     private lateinit var exerciseViewModel: ExerciseViewModel
-    private lateinit var workouts: Workout
-    private lateinit var exercises: Exercise
+    private lateinit var workouts: ArrayList<Workout>
+    private lateinit var exercises: ArrayList<Exercise>
     private lateinit var exerciseTextView: TextView
     private lateinit var workoutButton: FloatingActionButton
 
@@ -40,7 +40,10 @@ class ExerciseFragment: Fragment()  {
                // ViewModelProvider(this).get(ExerciseViewModel::class.java)
 
         val view = inflater.inflate(R.layout.fragment_exercise, container, false)
-        val workoutButton = view?.findViewById<FloatingActionButton>(R.id.fab)
+
+
+        //This makes the + button on the exercise screen work so that it leads you to the new workout screen
+        val workoutButton = view?.findViewById<FloatingActionButton>(R.id.fabExHome)
         workoutButton?.setOnClickListener{
             val intent = Intent(activity, NewWorkout::class.java)
             startActivity(intent)
@@ -48,6 +51,13 @@ class ExerciseFragment: Fragment()  {
 
         //I don't know what this is for now so I commented it out -- exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
         //})
+
+        //Adding some exercises, need to pull this from the database later
+        //exercises.add(Exercise("Bench Press", "Arms", "M"))
+        //exercises.add(Exercise("Crunches", "Abs", "E"))
+        //exercises.add(Exercise("Lunges", "Legs", "E"))
+        //exercises.add(Exercise("PullUps", "Arms", "H"))
+
         return view
         }
 }
