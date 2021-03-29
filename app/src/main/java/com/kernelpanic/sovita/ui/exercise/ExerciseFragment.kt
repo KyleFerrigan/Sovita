@@ -21,8 +21,7 @@ import com.kernelpanic.sovita.Workout
 
 class ExerciseFragment: Fragment()  {
     private lateinit var exerciseViewModel: ExerciseViewModel
-    private lateinit var workouts: ArrayList<Workout>
-    private lateinit var exercises: ArrayList<Exercise>
+
     private lateinit var exerciseTextView: TextView
     private lateinit var workoutButton: FloatingActionButton
 
@@ -52,11 +51,7 @@ class ExerciseFragment: Fragment()  {
         //I don't know what this is for now so I commented it out -- exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
         //})
 
-        //Adding some exercises, need to pull this from the database later
-        //exercises.add(Exercise("Bench Press", "Arms", "M"))
-        //exercises.add(Exercise("Crunches", "Abs", "E"))
-        //exercises.add(Exercise("Lunges", "Legs", "E"))
-        //exercises.add(Exercise("PullUps", "Arms", "H"))
+
 
         return view
         }
