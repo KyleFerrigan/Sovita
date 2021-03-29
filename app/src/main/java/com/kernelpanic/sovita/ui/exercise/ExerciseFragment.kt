@@ -17,8 +17,6 @@ import com.kernelpanic.sovita.NewWorkout
 import com.kernelpanic.sovita.R
 import com.kernelpanic.sovita.Workout
 
-
-
 class ExerciseFragment: Fragment()  {
     private lateinit var exerciseViewModel: ExerciseViewModel
 
@@ -26,17 +24,17 @@ class ExerciseFragment: Fragment()  {
     private lateinit var workoutButton: FloatingActionButton
 
     // fun OnCreate(savedInstanceState: Bundle?) {
-     //   super.onCreate(savedInstanceState)
+    //   super.onCreate(savedInstanceState)
 
     //}
 
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         //exerciseViewModel =
-               // ViewModelProvider(this).get(ExerciseViewModel::class.java)
+        // ViewModelProvider(this).get(ExerciseViewModel::class.java)
 
         val view = inflater.inflate(R.layout.fragment_exercise, container, false)
 
@@ -54,5 +52,5 @@ class ExerciseFragment: Fragment()  {
 
 
         return view
-        }
+    }
 }
