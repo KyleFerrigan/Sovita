@@ -1,27 +1,8 @@
 package com.kernelpanic.sovita
 
-data class Workout (val name: String) {
+data class Workout (val name: String, val exercises: ArrayList<Exercise>) {
     private  lateinit var _workoutName: String
     private lateinit var _exercises: ArrayList<Exercise>
-
-    //default constructor
-    fun Workout(){
-        _workoutName = ""
-        _exercises = arrayListOf<Exercise>()
-    }
-
-    //1 arguement con.
-    fun Workout(name:String, exercise: Exercise){
-        _workoutName = name
-        _exercises = arrayListOf<Exercise>()
-        _exercises.add(exercise)
-    }
-
-    //2 arguement con.
-    fun Workout(name:String){
-        _workoutName = name
-        _exercises = arrayListOf<Exercise>()
-    }
 
     fun addExercise(exercise: Exercise) {
         _exercises.add(exercise)
@@ -29,6 +10,10 @@ data class Workout (val name: String) {
 
     fun removeExercise(exercise: Exercise){
         _exercises.remove(exercise)
+    }
+
+    fun setName(name: String){
+        _workoutName = name
     }
 
     //getters

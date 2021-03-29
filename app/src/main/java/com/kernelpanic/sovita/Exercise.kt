@@ -1,4 +1,5 @@
 package com.kernelpanic.sovita
+
 // Add an image as parameter later on
 //This holds the exercise
 class Exercise(val _name: String, val _category: String, val _difficulty: String) {
@@ -7,16 +8,25 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
     private var _reps: Int = 0
     private var _sets: Int = 0
     private var _time: Double = 0.00
+    private var _checked: Boolean = false
 
-    fun setReps(reps:Int) {
+    fun setCheck(check: Boolean) {
+        _checked = check
+    }
+
+    fun isChecked(): Boolean {
+        return _checked
+    }
+
+    fun setReps(reps: Int) {
         _reps = reps
     }
 
-    fun setSets(sets:Int) {
+    fun setSets(sets: Int) {
         _sets = sets
     }
 
-    fun setTime(time:Double) {
+    fun setTime(time: Double) {
         _time = time
     }
 
