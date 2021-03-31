@@ -70,6 +70,7 @@
         </LinearLayout>
     </ScrollView>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabExHome"
         android:layout_width="wrap_content"
