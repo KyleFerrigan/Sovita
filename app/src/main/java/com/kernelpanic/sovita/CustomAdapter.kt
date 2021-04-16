@@ -8,10 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.TextView
 import java.util.*
+import android.widget.PopupMenu
 
 //This class is what is responsible for displaying the exercise list along with the checkboxes
-class CustomAdapter(private val dataSet: ArrayList<*>, mContext: Context) :
-        ArrayAdapter<Any?>(mContext, R.layout.row_item, dataSet) {
+class CustomAdapter(private val dataSet: ArrayList<Exercise>, mContext: Context) :
+        ArrayAdapter<Exercise>(mContext, R.layout.row_item, dataSet) {
 
     private class ViewHolder {
         lateinit var txtName: TextView
@@ -45,9 +46,31 @@ class CustomAdapter(private val dataSet: ArrayList<*>, mContext: Context) :
             viewHolder = convertView.tag as ViewHolder
             result = convertView
         }
-        val item: Exercise = getItem(position)
-        viewHolder.txtName.text = item.getName()
-        viewHolder.checkBox.isChecked = item.isChecked()
+        //val item: Exercise = getItem(position)
+        viewHolder.txtName.text = dataSet[position].getName()
+        viewHolder.checkBox.tag = position
+        //viewHolder.checkBox!!.isChecked = dataSet[position].getSelected()
+        viewHolder.checkBox.isChecked = dataSet[position].isChecked()
+        //dataSet[position].setCheck(viewHolder.checkBox.isChecked)
+        viewHolder.checkBox.setOnClickListener {
+            val pos = viewHolder.checkBox.tag as Int
+            if (dataSet[pos].isChecked()) {
+                dataSet[pos].setCheck(false)
+            }
+            else {
+                dataSet[pos].setCheck(true)
+            }
+        }
+        //if (viewHolder.checkBox.isChecked) {
+        //dataSet[position].setCheck(viewHolder.checkBox.isChecked)
+
+        //}
+        //item.isChecked()
+
+
+
+
+
         return result
     }
 }
