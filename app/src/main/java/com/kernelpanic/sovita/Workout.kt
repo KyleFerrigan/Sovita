@@ -1,8 +1,10 @@
 package com.kernelpanic.sovita
 
-data class Workout (val name: String, val exercises: ArrayList<Exercise>) {
-    private  lateinit var _workoutName: String
-    private lateinit var _exercises: ArrayList<Exercise>
+import java.io.Serializable
+
+data class Workout (val name: String, val _exercises: ArrayList<Exercise>): Serializable {
+    private var _workoutName: String = name
+    //private var _exercises: ArrayList<Exercise>
 
     fun addExercise(exercise: Exercise) {
         _exercises.add(exercise)
@@ -15,7 +17,9 @@ data class Workout (val name: String, val exercises: ArrayList<Exercise>) {
     fun setName(name: String){
         _workoutName = name
     }
-
+    fun getWorkoutName(): String {
+        return _workoutName
+    }
     //getters
     fun getExerciseName(index:Int): String {
         return _exercises[index].getName()
