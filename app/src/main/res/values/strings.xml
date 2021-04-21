@@ -23,4 +23,6 @@
     <string name="reset">Reset</string>
     <string name="submit">Submit</string>
     <string name="user_name">User Name</string>
+    <string name="time">Time</string>
+    <string name="reps">Reps</string>
 </resources>
