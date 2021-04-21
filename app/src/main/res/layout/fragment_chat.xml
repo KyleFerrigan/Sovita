@@ -7,8 +7,6 @@
     tools:context=".ui.chat.ChatFragment"
     android:layout_marginBottom="?attr/actionBarSize">
 
-
-
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"

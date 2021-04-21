@@ -31,20 +31,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/reps"
-            android:text="Reps" />
+            android:text="@string/reps"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/time"
-            android:text="Time" />
+            android:text="@string/time"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/exercise_input" />
+            android:id="@+id/exercise_input"
+            android:autofillHints="Enter reps here" />
 
         <Button
             android:id="@+id/next_exercise"
@@ -52,11 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             app:icon="@drawable/next_button"
-            app:iconGravity="start" />
-
-
+            app:iconGravity="start"
+            tools:ignore="RtlHardcoded" />
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
