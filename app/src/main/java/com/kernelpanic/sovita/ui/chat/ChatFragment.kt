@@ -23,8 +23,14 @@ class ChatFragment : Fragment() {
                 ViewModelProvider(this).get(ChatViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_chat, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        chatViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView2: TextView = root.findViewById(R.id.text_notifications2)
+        val textView3: TextView = root.findViewById(R.id.text_notifications3)
+        val textView4: TextView = root.findViewById(R.id.text_notifications4)
+        chatViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
+            textView2.text = it
+            textView3.text = it
+            textView4.text = it
         })
         return root
     }

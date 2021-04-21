@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class ChatViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Coming next semester!"
+        //value = "Naperville Speedsters"
     }
     val text: LiveData<String> = _text
 }
