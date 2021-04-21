@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 }
-class okhttptest{
+/*class okhttptest{
     OkHttpClient client = new OkHttpClient();
 
     JsonObject postData = new JsonObject()
@@ -59,4 +58,4 @@ class okhttptest{
             }
         }
     }
-}
+}*/
