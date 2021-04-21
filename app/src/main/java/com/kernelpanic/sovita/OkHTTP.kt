@@ -1,55 +1,43 @@
 package com.kernelpanic.sovita
-import okhttp3.*
-import java.io.*
+import okhttp3.Call
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
 
 
-
-public fun GetRequest(urlIn: String){
-
+public fun GetRequest(urlIn: String): String {
+    //todo
+    return urlIn;
 }
 public fun PostWorkoutData(workoutIDIn: String, userIDIn: String, containsExercisesIn: String) {//Input should be as follows Url,IDName,ID,parameterName,ParameterData
-    val client = OkHttpClient()
 
-    val formBody: FormBody = okhttp3.FormBody.Builder()
-        .add("WorkoutID", workoutIDIn)    //id info
-        .add("UserID", userIDIn) //data to change
-        .add("ContainsExercises", containsExercisesIn)
-        .build()
+    // Create okhttp3 form body builder.
+    val formBodyBuilder: FormBody.Builder = FormBody.Builder()
 
-    val request: Request = okhttp3.Request.Builder()
-        .url("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises")//url to execute on
-        .post(formBody)
-        .build()
+    // Add form parameters
+    formBodyBuilder.add("WorkoutID", workoutIDIn)
+    formBodyBuilder.add("UserID", userIDIn)
+    formBodyBuilder.add("ContainsExercises", containsExercisesIn)
 
-    val call = client.newCall(request)
+    // Build form body.
+    val formBody: FormBody = formBodyBuilder.build()
+
+    // Create a http request object.
+    var builder: Request.Builder = Request.Builder()
+    builder = builder.url("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000" + "/Workouts")
+    builder = builder.post(formBody)
+    val request = builder.build()
+
+    // Create a new Call object with post method.
+    val call: Call = okhttp3.OkHttpClient().newCall(request)
+
+    // Execute the request and get the response synchronously.
     val response = call.execute()
 }
 
-//Modular attempt below, not gonna happen
-public fun PostData(urlIn: String, idName: String, idIn: String, paramName: String, valueIn: String) {//Input should be as follows Url,IDName,ID,parameterName,ParameterData
-    val client = OkHttpClient()
-    val formBody: FormBody = okhttp3.FormBody.Builder()
-        .add(idName, idIn)    //id info
-        .add(paramName, valueIn) //data to change
-        .build()
-
-    val request: Request = okhttp3.Request.Builder()
-        .url(urlIn)//url to execute on
-        .post(formBody)
-        .build()
-
-    try {
-        val response = client.newCall(request).execute()
-
-        // Do something with the response.
-    } catch (e: IOException) {
-        e.printStackTrace()
-    }
-}
-
-fun main(){
+fun main(){//todo comment this out for the whole app to run
     PostWorkoutData("2", "3", "3,2,5");
-    //PostData("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises", "ExerciseID", "93", "ExerciseName", "ServerTest");
 }
 
 
