@@ -1,11 +1,14 @@
 package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,6 +19,9 @@ import com.kernelpanic.sovita.Exercise
 import com.kernelpanic.sovita.NewWorkout
 import com.kernelpanic.sovita.R
 import com.kernelpanic.sovita.Workout
+import org.jetbrains.anko.activityUiThread
+import org.jetbrains.anko.doAsync
+import java.net.URL
 
 class ExerciseFragment: Fragment()  {
     private lateinit var exerciseViewModel: ExerciseViewModel
@@ -23,11 +29,11 @@ class ExerciseFragment: Fragment()  {
     private lateinit var exerciseTextView: TextView
     private lateinit var workoutButton: FloatingActionButton
 
+
     // fun OnCreate(savedInstanceState: Bundle?) {
     //   super.onCreate(savedInstanceState)
 
     //}
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +48,7 @@ class ExerciseFragment: Fragment()  {
         //This makes the + button on the exercise screen work so that it leads you to the new workout screen
         val workoutButton = view?.findViewById<FloatingActionButton>(R.id.fabExHome)
         workoutButton?.setOnClickListener{
-            val intent = Intent(activity, NewWorkout::class.java)
+            val intent = Intent(this.activity, NewWorkout::class.java)
             startActivity(intent)
         }
 

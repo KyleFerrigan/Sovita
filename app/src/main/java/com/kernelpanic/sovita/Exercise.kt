@@ -1,8 +1,12 @@
 package com.kernelpanic.sovita
 
+import android.media.Image
+import java.net.URL
+import java.io.Serializable;
+
 // Add an image as parameter later on
 //This holds the exercise
-class Exercise(val _name: String, val _category: String, val _difficulty: String) {
+class Exercise(val _name: String, val _category: String, val _difficulty: String, val _imageLink: String) {
     //From what I found online, there is no constructor, you just set the variables in the header
     //Member variables
     private var _reps: Int = 0
@@ -52,6 +56,12 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
 
     fun getTime(): Double {
         return _time
+    }
+
+    fun getImageLink() : String {
+    //    var picture = URL("https://sovita.s3.amazonaws.com/WorkoutGifs/woodChopper.gif").getContent()
+    //    return picture
+        return _imageLink
     }
 
 }
