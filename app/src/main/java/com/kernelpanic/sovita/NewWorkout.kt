@@ -1,30 +1,20 @@
 package com.kernelpanic.sovita
 
-import android.R.layout.simple_list_item_1
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import org.jetbrains.anko.activityUiThread
-import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
 import java.net.URL
-import java.util.concurrent.Executors
-
 
 
 class NewWorkout : AppCompatActivity() {
 
     private lateinit var prevButton: Button
-    private lateinit var nextButton: Button
+
 
     //Holds all the users workouts, don't know if this belongs here or if we need it but it's here
     private lateinit var user_workouts: ArrayList<Workout>
@@ -98,6 +88,7 @@ class NewWorkout : AppCompatActivity() {
         setContentView(R.layout.activity_new_workout)
 
         workout_name = findViewById(R.id.new_workout_name)
+
         save_workoutButton = findViewById(R.id.save_workout)
         all_exercises = ArrayList<Exercise>()
 
@@ -166,12 +157,12 @@ class NewWorkout : AppCompatActivity() {
             }
 
             //Creates the workout will the entered name and all exercises that were checked
-            new_workout = Workout(workout_name.toString(), all_exercises)
+            new_workout = Workout(workout_name.text.toString(), all_exercises)
 
-            print(new_workout.getExerciseName(0))
-            //val intent = Intent(this, NewWorkout2::class.java)
-            //startActivity(intent)
+            //print(new_workout.getExerciseName(0))
 
+            val intent = Intent(this@NewWorkout, WorkoutEdit::class.java)
+            startActivity(intent)
 
             //Add to list or database..I think it's database
             //user_workouts.add(Workout(workout_name.toString(), all_exercises))
@@ -182,12 +173,7 @@ class NewWorkout : AppCompatActivity() {
             finish()
         }
 
-        nextButton = findViewById(R.id.next_button)
-        nextButton.setOnClickListener {
-            //App crashes?
-            val intent = Intent(this, NewWorkout2::class.java)
-            startActivity(intent)
-        }
+
 
 
         abExercises = ArrayList<Exercise>()

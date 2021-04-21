@@ -44,4 +44,13 @@ data class Workout (val name: String, val _exercises: ArrayList<Exercise>): Seri
     fun getExerciseTime(index:Int): Double {
         return _exercises[index].getTime()
     }
+    fun getNumExercises() : Int {
+        return _exercises.size
+    }
+    fun setExerciseReps(index:Int, reps:Int) {
+        _exercises[index].setReps(reps)
+    }
+    fun setExerciseTime(index:Int, time:Double) {
+        _exercises[index].setTime(time)
+    }
 }

@@ -36,13 +36,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:layout_width="62dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/next_button"
-                    app:icon="@drawable/ic_back_button"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text="@string/enter_workoutName"
+                    android:hint="@string/enter_workoutName"
                     app:layout_constraintEnd_toStartOf="@+id/save_workout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
