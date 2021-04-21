@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kernelpanic.sovita.R
 
+
 class ChatFragment : Fragment() {
 
     private lateinit var chatViewModel: ChatViewModel
