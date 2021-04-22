@@ -11,7 +11,7 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
     //Member variables
     private var _reps: Int = 0
     private var _sets: Int = 0
-    private var _time: Double = 0.00
+    private var _time: Int = 0
     private var _checked: Boolean = false
 
     fun setCheck(check: Boolean) {
@@ -30,7 +30,7 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
         _sets = sets
     }
 
-    fun setTime(time: Double) {
+    fun setTime(time: Int) {
         _time = time
     }
 
@@ -54,7 +54,7 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
         return _sets
     }
 
-    fun getTime(): Double {
+    fun getTime(): Int {
         return _time
     }
 
