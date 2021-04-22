@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovita"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WorkoutEdit"></activity>
+        <activity
+            android:name=".WorkoutSaved"
+            android:label="@string/title_activity_workout_saved"
+            android:theme="@style/Theme.Sovita.NoActionBar"></activity>
+        <activity android:name=".WorkoutEdit" />
         <activity android:name=".NewWorkout_2" />
         <activity android:name=".NewWorkout" />
         <activity
