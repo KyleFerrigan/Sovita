@@ -12,11 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovita"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
             android:name=".WorkoutScreen"
             android:label="@string/title_activity_workout_screen"
-            android:theme="@style/Theme.Sovita.NoActionBar"></activity>
+            android:theme="@style/Theme.Sovita.NoActionBar" />
         <activity
             android:name=".WorkoutSaved"
             android:label="@string/title_activity_workout_saved"
