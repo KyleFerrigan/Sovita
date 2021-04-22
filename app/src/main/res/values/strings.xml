@@ -40,4 +40,10 @@
     <string name="running4lyfe">Running 4 Lyfe</string>
     <string name="studs_only">The Fellas™</string>
     <string name="prof_kim">Prof Kim\'s gains chat</string>
+    <string name="start">Start</string>
+    <string name="TEMP">(TEMP)Exercise name</string>
+    <string name="stop">Stop</string>
+    <string name="workout_saved">Workout Saved!</string>
+    <string name="go_back">Okay! - Go Back</string>
+    <string name="title_activity_workout_screen">WorkoutScreen</string>
 </resources>
