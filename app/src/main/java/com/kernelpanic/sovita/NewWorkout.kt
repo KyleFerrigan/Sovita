@@ -15,7 +15,6 @@ class NewWorkout : AppCompatActivity() {
 
     private lateinit var prevButton: Button
 
-
     //Holds all the users workouts, don't know if this belongs here or if we need it but it's here
     private lateinit var user_workouts: ArrayList<Workout>
 
@@ -158,22 +157,19 @@ class NewWorkout : AppCompatActivity() {
 
             //Creates the workout will the entered name and all exercises that were checked
             new_workout = Workout(workout_name.text.toString(), all_exercises)
-
-            //print(new_workout.getExerciseName(0))
+            println("Worjout Name:")
+            println(new_workout.getWorkoutName())
 
             val intent = Intent(this@NewWorkout, WorkoutEdit::class.java)
+            intent.putExtra("workout",new_workout)
             startActivity(intent)
 
-            //Add to list or database..I think it's database
-            //user_workouts.add(Workout(workout_name.toString(), all_exercises))
         }
 
         prevButton = findViewById(R.id.prev_button)
         prevButton.setOnClickListener{
             finish()
         }
-
-
 
 
         abExercises = ArrayList<Exercise>()
