@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Sovita</string>
     <string name="title_home">Home</string>
     <string name="title_exercise">Exercise</string>
@@ -18,15 +18,4 @@
     <string name="exHomeFabDesc">Add Workout</string>
     <string name="mealsHomeFabDesc">Add Meal</string>
     <string name="chatHomeFabDesc">Start new chat</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="reset">Reset</string>
-    <string name="submit">Submit</string>
-    <string name="user_name">User Name</string>
-    <string name="time">Time</string>
-    <string name="reps">Reps</string>
-    <string name="naperville_speedsters">Naperville Speedsters</string>
-    <string name="running4lyfe">Running 4 Lyfe</string>
-    <string name="studs_only">The Fellas™</string>
-    <string name="prof_kim">Prof Kim\'s gains chat</string>
 </resources>
