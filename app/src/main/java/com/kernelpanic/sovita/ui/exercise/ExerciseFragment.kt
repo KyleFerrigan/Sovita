@@ -52,10 +52,11 @@ class ExerciseFragment: Fragment()  {
         val view = inflater.inflate(R.layout.fragment_exercise, container, false)
 
         val workoutNames = ArrayList<String>()
+        val workoutID = ArrayList<String>()
         listWorkouts = view.findViewById(R.id.workout_list)
 
         //This will pull all the users workouts
-        doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/userid/3",workoutNames,listWorkouts)
+        doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/userid/3",workoutNames,listWorkouts,workoutID)
 
         println("Final Workout Names")
         for (i in 0..(workoutNames.size-1)){
@@ -83,7 +84,7 @@ class ExerciseFragment: Fragment()  {
         return view
         }
 
-    private fun doAsychcall(url: String, workoutName: ArrayList<String>, listworkouts: ListView) {
+    private fun doAsychcall(url: String, workoutName: ArrayList<String>, listworkouts: ListView, workoutID: ArrayList<String>) {
         doAsync() {
             println("Here!!!")
             var result = URL(url).readText()
@@ -127,20 +128,6 @@ class ExerciseFragment: Fragment()  {
             var timeSlot = 9
             var nameSlot = 11
 
-            //13,15,17,19,21,23 add 12
-
-
-            /*for(i in 0..count) {
-                val exercises = ArrayList<Exercise>()
-                for (j in 0..(workoutInfo[exercisesSlot].length-5)) {
-                    val tempexercise = Exercise()
-                }
-
-
-                workouts.add(Workout(workoutInfo[nameSlot]))
-                //Name [11], Exercises
-            }*/
-            //val workoutNames = ArrayList<String>()
             for(i in 0..count-1){
                 println("For loop")
 
@@ -148,14 +135,12 @@ class ExerciseFragment: Fragment()  {
                 name.removeRange(0,1)
                 name.removeRange(name.length-1,name.length)
                 workoutName.add(name)
+                workoutID.add(workoutInfo[idSlot])
                 println("Name added:" + name)
-                //println(name)
-                //println("Name Slot")
                 nameSlot += 12
-                //print(nameSlot)
+
             }
             uiThread {
-                println("Jessica is hungry")
                 val adapter = activity?.let {
                     ArrayAdapter(
                         it,
@@ -169,6 +154,7 @@ class ExerciseFragment: Fragment()  {
                 listWorkouts.onItemClickListener =
                     AdapterView.OnItemClickListener { parent, view, position, id ->
                         val selectedItemText = parent.getItemAtPosition(position)
+                        val selectedWorkout = workoutID[position]
                         if (textView != null) {
                             textView.text = "Selected : $selectedItemText"
                         }
