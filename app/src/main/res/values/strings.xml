@@ -1,4 +1,5 @@
 <resources>
+    <!-- Titles and headers-->
     <string name="app_name">Sovita</string>
     <string name="title_home">Home</string>
     <string name="title_exercise">Exercise</string>
@@ -45,5 +46,17 @@
     <string name="stop">Stop</string>
     <string name="workout_saved">Workout Saved!</string>
     <string name="go_back">Okay! - Go Back</string>
+
+    <!-- Workout types-->
     <string name="title_activity_workout_screen">WorkoutScreen</string>
+    <string name="triceps">Triceps</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="quads">Quads</string>
+    <string name="hamstrings">Hamstrings</string>
+    <string name="glutes">Glutes</string>
+    <string name="chest">Chest</string>
+    <string name="calves">Calves</string>
+    <string name="biceps">Biceps</string>
+    <string name="back">Back</string>
+    <string name="abs">Abs</string>
 </resources>
