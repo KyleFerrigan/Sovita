@@ -25,7 +25,7 @@ class WorkoutScreen : AppCompatActivity() {
         setContentView(R.layout.activity_workout_screen)
         //setSupportActionBar(findViewById(R.id.toolbar))
 
-        mTextViewCountDown = findViewById(R.id.text_view_countdown)
+        mTextViewCountDown = findViewById(R.id.text_timer_reps)
         mButtonStartPause = findViewById(R.id.button_start_pause)
         mButtonReset = findViewById(R.id.button_reset)
 
