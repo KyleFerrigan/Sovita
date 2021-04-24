@@ -60,4 +60,5 @@
     <string name="back">Back</string>
     <string name="abs">Abs</string>
     <string name="_00_00">00:00</string>
+    <string name="workout_name">Workout Name</string>
 </resources>
