@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 
+//Some of this code was obtained from YouTube and other helpful sources
 class WorkoutScreen : AppCompatActivity() {
     private val START_TIME_IN_MILLIS: Long = 600000
     private var mTextViewCountDown: TextView? = null
@@ -24,12 +25,12 @@ class WorkoutScreen : AppCompatActivity() {
         setContentView(R.layout.activity_workout_screen)
         //setSupportActionBar(findViewById(R.id.toolbar))
 
-        mTextViewCountDown = findViewById(R.id.text_view_countdown);
-        mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
+        mTextViewCountDown = findViewById(R.id.text_view_countdown)
+        mButtonStartPause = findViewById(R.id.button_start_pause)
+        mButtonReset = findViewById(R.id.button_reset)
 
         mButtonStartPause?.run {
-            setOnClickListener(View.OnClickListener() {
+            setOnClickListener {
                 fun onClick() {
                     if (mTimerRunning) {
                         pauseTimer()
@@ -37,16 +38,16 @@ class WorkoutScreen : AppCompatActivity() {
                         startTimer()
                     }
                 }
-            })
+            }
         }
         mButtonReset?.run {
-            setOnClickListener(View.OnClickListener() {
+            setOnClickListener {
                 fun onClick() {
                     resetTimer()
                 }
-            })
+            }
         }
-        updateCountDownText();
+        updateCountDownText()
     }
 
     @SuppressLint("SetTextI18n")
@@ -92,4 +93,4 @@ class WorkoutScreen : AppCompatActivity() {
         mTextViewCountDown!!.text = timeLeftFormatted
     }
 
-}
+}//end WorkoutScreen class

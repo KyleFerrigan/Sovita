@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="426dp"
         android:layout_marginBottom="4dp"
-        android:text="00:00"
+        android:text="@string/_00_00"
         android:textColor="@android:color/black"
         android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/button_start_pause"
@@ -46,52 +46,5 @@
         app:layout_constraintEnd_toStartOf="@+id/button_reset"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_countdown" />
-
-    <!--
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="62dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/TEMP"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="Text" />
-
-    <Button
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginBottom="188dp"
-        android:text="@string/start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="7dp"
-        android:text="@string/stop"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTime"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
-
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="22dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/start"
-        app:layout_constraintStart_toStartOf="@+id/start"
-        android:autofillHints="Text" />
-    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
