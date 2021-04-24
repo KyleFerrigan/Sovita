@@ -58,10 +58,10 @@ class ExerciseFragment: Fragment()  {
         //This will pull all the users workouts
         doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/userid/3",workoutNames,listWorkouts,workoutID)
 
-        println("Final Workout Names")
-        for (i in 0..(workoutNames.size-1)){
-            println(workoutNames[i])
-        }
+        //println("Final Workout Names")
+        //for (i in 0..(workoutNames.size-1)){
+        //    println(workoutNames[i])
+        //}
 
 
 
@@ -90,8 +90,8 @@ class ExerciseFragment: Fragment()  {
             var result = URL(url).readText()
             //URL(url).apply { }
 
-            println("Result")
-            println(result)
+            //println("Result")
+            //println(result)
             val workoutInfo = ArrayList<String>()
 
             result = result.removeRange(0, 40) //Gets rid of the header
@@ -99,8 +99,8 @@ class ExerciseFragment: Fragment()  {
                 result.length - 3,
                 result.length
             ) //Gets rid of the extra }]} at the end
-            println("Result after getting rid of extra")
-            println(result)
+            //println("Result after getting rid of extra")
+            //println(result)
 
             var count = 0 //Holds the number of workouts there are
 
@@ -111,15 +111,15 @@ class ExerciseFragment: Fragment()  {
                 for (j in exercise_info) {
                     val exercise_info2 = j.split("\":").toTypedArray() //Splits then up by row
                     for (k in exercise_info2) {
-                        println("K")
-                        println(k)
+                        //println("K")
+                        //println(k)
                         workoutInfo.add(k)
                     }
                 }
             }
 
-            println("Count Final")
-            println(count)
+            //println("Count Final")
+            //println(count)
 
             var idSlot = 1
             var useridSlot = 3
@@ -129,14 +129,14 @@ class ExerciseFragment: Fragment()  {
             var nameSlot = 11
 
             for(i in 0..count-1){
-                println("For loop")
+                //println("For loop")
 
                 val name = workoutInfo[nameSlot]
                 name.removeRange(0,1)
                 name.removeRange(name.length-1,name.length)
                 workoutName.add(name)
                 workoutID.add(workoutInfo[idSlot])
-                println("Name added:" + name)
+                //println("Name added:" + name)
                 nameSlot += 12
 
             }

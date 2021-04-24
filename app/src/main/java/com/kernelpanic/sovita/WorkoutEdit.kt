@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.jetbrains.anko.activityUiThread
+import org.jetbrains.anko.doAsync
 
 class WorkoutEdit : AppCompatActivity() {
     private lateinit var workoutName : TextView
@@ -13,6 +15,7 @@ class WorkoutEdit : AppCompatActivity() {
     private lateinit var time_button : Button
     private lateinit var exercise_input : EditText
     private lateinit var exercise_name : TextView
+    private lateinit var exerciseIDs : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +23,22 @@ class WorkoutEdit : AppCompatActivity() {
 
         val intent = intent
         val workout: Workout = intent.getSerializableExtra("workout") as Workout
+      //  val exerciseIDs = intent.getStringArrayListExtra("exerciseID")
+        /*
+        var exerciseIDStr = ""
 
+        if (exerciseIDs != null) {
+            for (i in 0..exerciseIDs.size) {
+                if (i == exerciseIDs.size-1) {
+                  exerciseIDStr = exerciseIDStr + exerciseIDs[i]
+                } else {
+                    exerciseIDStr = exerciseIDStr + exerciseIDs[i] + ","
+                }
+            }
+        }
+        println("Exercise String")
+        println(exerciseIDStr)
+*/
         val exercises = ArrayList<Exercise>()
         //exercises.add(Exercise("one", "legs", "Easy","test"))
         //exercises.add(Exercise("two", "legs", "Easy2","test2"))
@@ -51,10 +69,18 @@ class WorkoutEdit : AppCompatActivity() {
                 exercise_input.setText("")
                 exercise_input.hint = "Enter Time (Minutes) or Reps (Whole #)"
             } else {
+                doAsync {
+                    addWorkoutData(
+                            workout.getWorkoutID_().toString(), "3", workout.getExerciseIDs(),
+                            workout.getExerciseReps(), workout.getExerciseTimes(), workout.getWorkoutName()
+                    )
+                    println("Here")
+                    activityUiThread {
+
+                    }
+                }
                 val intent = Intent(this@WorkoutEdit, WorkoutSaved::class.java)
                 startActivity(intent)
-
-
             }
         }
 
@@ -66,6 +92,16 @@ class WorkoutEdit : AppCompatActivity() {
                 exercise_input.setText("")
                 exercise_input.hint = "Enter Time (Minutes) or Reps (Whole #)"
             } else {
+                doAsync {
+                    addWorkoutData(
+                        workout.getWorkoutID_().toString(), "3", workout.getExerciseIDs(),
+                        workout.getExerciseReps(), workout.getExerciseTimes(), workout.getWorkoutName()
+                    )
+                    println("Here333")
+                    activityUiThread {
+
+                    }
+                }
                 val intent = Intent(this@WorkoutEdit, WorkoutSaved::class.java)
                 startActivity(intent)
             }

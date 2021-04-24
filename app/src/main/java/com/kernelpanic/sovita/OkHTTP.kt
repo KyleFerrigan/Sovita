@@ -1,5 +1,6 @@
 package com.kernelpanic.sovita
 
+import android.telecom.Call
 import okhttp3.*
 import java.io.*
 
@@ -19,7 +20,7 @@ public fun addWorkoutData(workoutIDIn: String, userIDIn: String, containsExercis
     val request = builder.build()
 
     // Create a new Call object with post method.
-    val call: Call = OkHttpClient().newCall(request)
+    val call: okhttp3.Call = OkHttpClient().newCall(request)
 
     // Execute the request and get the response synchronously.
     val response = call.execute()
