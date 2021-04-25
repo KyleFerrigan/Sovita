@@ -20,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,9 +31,9 @@
                 <Button
                     android:id="@+id/prev_button"
                     android:layout_width="62dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_back_button"
+                    android:icon="@drawable/ic_back_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,86 +52,97 @@
                     android:hint="@string/enter_workoutName"
                     app:layout_constraintEnd_toStartOf="@+id/save_workout"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:autofillHints="Text" />
 
                 <Button
                     android:id="@+id/save_workout"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_check_mark"
+                    android:icon="@drawable/ic_check_mark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/abs_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Abs" />
+                        android:text="@string/abs"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/back_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Back" />
+                        android:text="@string/back"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/biceps_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Biceps" />
+                        android:text="@string/biceps"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/calves_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Calves" />
+                        android:text="@string/calves"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/chest_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Chest" />
+                        android:text="@string/chest"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/glutes_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Glutes" />
+                        android:text="@string/glutes"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/hamstrings_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Hamstrings" />
+                        android:text="@string/hamstrings"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/quads_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Quads" />
+                        android:text="@string/quads"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/shoulders_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Shoulders" />
+                        android:text="@string/shoulders"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/triceps_catagory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Triceps" />
+                        android:text="@string/triceps"
+                        tools:ignore="ButtonStyle" />
 
                 </LinearLayout>
 

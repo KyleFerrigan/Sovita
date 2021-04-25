@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1077882960031",
+    "project_id": "sovita-6baae",
+    "storage_bucket": "sovita-6baae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077882960031:android:877bac16211e19f8268aaa",
+        "android_client_info": {
+          "package_name": "com.kernelpanic.sovita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077882960031-fr6g48l5r5fqvn3mfh0v51b799b81mik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTxPQliJn9P25kcfUozZRyFqU7eYmAepI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077882960031-fr6g48l5r5fqvn3mfh0v51b799b81mik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

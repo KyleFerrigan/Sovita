@@ -1,4 +1,5 @@
 <resources>
+    <!-- Titles and headers-->
     <string name="app_name">Sovita</string>
     <string name="title_home">Home</string>
     <string name="title_exercise">Exercise</string>
@@ -27,4 +28,37 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="reset">Reset</string>
+    <string name="submit">Submit</string>
+    <string name="user_name">User Name</string>
+    <string name="time">Time</string>
+    <string name="reps">Reps</string>
+
+    <!-- Dummy Group chat names-->
+    <string name="naperville_speedsters">Naperville Speedsters</string>
+    <string name="running4lyfe">Running 4 Lyfe</string>
+    <string name="studs_only">The Fellas™</string>
+    <string name="prof_kim">Prof Kim\'s gains chat</string>
+    <string name="start">Start</string>
+    <string name="TEMP">(TEMP)Exercise name</string>
+    <string name="stop">Stop</string>
+    <string name="workout_saved">Workout Saved!</string>
+    <string name="go_back">Okay! - Go Back</string>
+
+    <!-- Workout types-->
+    <string name="title_activity_workout_screen">WorkoutScreen</string>
+    <string name="triceps">Triceps</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="quads">Quads</string>
+    <string name="hamstrings">Hamstrings</string>
+    <string name="glutes">Glutes</string>
+    <string name="chest">Chest</string>
+    <string name="calves">Calves</string>
+    <string name="biceps">Biceps</string>
+    <string name="back">Back</string>
+    <string name="abs">Abs</string>
+    <string name="_00_00">00:00</string>
+    <string name="workout_name">Workout Name</string>
 </resources>
