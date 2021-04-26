@@ -12,6 +12,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 //Some of this code was obtained from YouTube and other helpful sources
@@ -23,6 +24,7 @@ class WorkoutScreen : AppCompatActivity() {
     private var mCountDownTimer: CountDownTimer? = null
     private var mTimerRunning = false
     private var mTimeLeftInMillis = START_TIME_IN_MILLIS
+    private lateinit var exercises : ArrayList<Exercise>
 
     //private lateinit var
 
@@ -38,9 +40,9 @@ class WorkoutScreen : AppCompatActivity() {
         val workoutNameDisplay = findViewById<TextView>(R.id.workout_name)
         workoutNameDisplay.text = workoutname
 
-        val exercises = ArrayList<Exercise>() //This will hold all the exercises for the workout
+        exercises = ArrayList<Exercise>() //This will hold all the exercises for the workout
 
-        doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/$workoutID",exercises)
+        doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/$workoutID")
 
 
         mTextViewCountDown = findViewById(R.id.text_timer_reps)
@@ -69,7 +71,7 @@ class WorkoutScreen : AppCompatActivity() {
     }
 
 
-    private fun doAsychCallWorkout(url : String, exercises: ArrayList<Exercise>) {
+    private fun doAsychCallWorkout(url : String) {
         doAsync() {
             var result = URL(url).readText()
             val workoutInfo = ArrayList<String>()
@@ -113,6 +115,8 @@ class WorkoutScreen : AppCompatActivity() {
             val tempExerciseInfo = ArrayList<String>()
             var count = 0 //This will keep track of the reps and time for each exercise
 
+
+            val exercises2 = ArrayList<Exercise>()
             for (i in exerciseIDs) {
                 //Pull Exercise from Database
                 var eResult = URL("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/id/$i").readText()
@@ -124,12 +128,13 @@ class WorkoutScreen : AppCompatActivity() {
                     eResult.length
                 )
 
+
                 val split_result2 = eResult.split(",\"").toTypedArray()
                 for (i in split_result2) {
                     val exercise_info2 = i.split("\":").toTypedArray()
                     for (j in exercise_info2) {
-                        println("J2")
-                        println(j)
+                        //println("J2")
+                        //println(j)
                         tempExerciseInfo.add(j)
                     }
                 }
@@ -155,15 +160,20 @@ class WorkoutScreen : AppCompatActivity() {
                 //Leave the qoute because we need for url
 
                 //Create Exercise Objects
-                exercises.add(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
-                exercises[count].setReps(reps[count].toInt())
-                exercises[count].setTime(times[count].toInt())
+                exercises2.add(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
+                exercises2[count].setReps(reps[count].toInt())
+                exercises2[count].setTime(times[count].toInt())
+                println("ex" + exercises2[count].getName())
                 count += 1
                 tempExerciseInfo.clear()
             }
 
 
             uiThread {
+
+                for (i in exercises2) {
+                    exercises.add(Exercise(i.getName(),i._category,i.getDifficulty(),i._imageLink,i.getiD()))
+                }
 
             }
         }

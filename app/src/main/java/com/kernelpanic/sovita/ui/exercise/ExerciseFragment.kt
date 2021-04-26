@@ -129,11 +129,14 @@ class ExerciseFragment: Fragment()  {
             var nameSlot = 11
 
             for(i in 0..count-1){
+                //println("For loop")
+
                 val name = workoutInfo[nameSlot]
                 name.removeRange(0,1)
                 name.removeRange(name.length-1,name.length)
                 workoutName.add(name)
                 workoutID.add(workoutInfo[idSlot])
+                //println("Name added:" + name)
                 nameSlot += 12
                 idSlot += 12
 
@@ -146,7 +149,22 @@ class ExerciseFragment: Fragment()  {
                     )
                 }
 
+                //val textView = view?.findViewById<TextView>(R.id.test)
+
                 listWorkouts.adapter = adapter
+                /*listWorkouts.onItemClickListener =
+                    AdapterView.OnItemClickListener { parent, view, position, id ->
+                        val selectedItemText = parent.getItemAtPosition(position)
+                        val selectedWorkout = workoutID[position]
+                        //if (textView != null) {
+                        //    textView.text = "Selected : $selectedItemText"
+                        //}
+                        val intent = Intent(this.activity, ExerciseBegin::class.java)
+                        intent.putExtra("workout",new_workout)
+                        startActivity(intent)
+
+
+                    }*/
             }
         }
     }
