@@ -93,23 +93,10 @@ class ExerciseFragment: Fragment()  {
         return view
         }
 
-    /*private fun open(selectedworkout : String){
-        val intent = Intent(this.activity, ExerciseBegin::class.java)
-        //intent.putExtra("workout",selectedWorkout)
-        startActivity(intent)
-    }*/
-
-
-
 
     private fun doAsychcall(url: String, workoutName: ArrayList<String>, listworkouts: ListView, workoutID: ArrayList<String>) {
         doAsync() {
-            //println("Here!!!")
             var result = URL(url).readText()
-            //URL(url).apply { }
-
-            //println("Result")
-            //println(result)
             val workoutInfo = ArrayList<String>()
 
             result = result.removeRange(0, 40) //Gets rid of the header
@@ -117,8 +104,6 @@ class ExerciseFragment: Fragment()  {
                 result.length - 3,
                 result.length
             ) //Gets rid of the extra }]} at the end
-            //println("Result after getting rid of extra")
-            //println(result)
 
             var count = 0 //Holds the number of workouts there are
 
@@ -136,9 +121,6 @@ class ExerciseFragment: Fragment()  {
                 }
             }
 
-            //println("Count Final")
-            //println(count)
-
             var idSlot = 1
             var useridSlot = 3
             var exercisesSlot = 5
@@ -147,14 +129,11 @@ class ExerciseFragment: Fragment()  {
             var nameSlot = 11
 
             for(i in 0..count-1){
-                //println("For loop")
-
                 val name = workoutInfo[nameSlot]
                 name.removeRange(0,1)
                 name.removeRange(name.length-1,name.length)
                 workoutName.add(name)
                 workoutID.add(workoutInfo[idSlot])
-                //println("Name added:" + name)
                 nameSlot += 12
                 idSlot += 12
 
@@ -167,22 +146,7 @@ class ExerciseFragment: Fragment()  {
                     )
                 }
 
-                //val textView = view?.findViewById<TextView>(R.id.test)
-
                 listWorkouts.adapter = adapter
-                /*listWorkouts.onItemClickListener =
-                    AdapterView.OnItemClickListener { parent, view, position, id ->
-                        val selectedItemText = parent.getItemAtPosition(position)
-                        val selectedWorkout = workoutID[position]
-                        //if (textView != null) {
-                        //    textView.text = "Selected : $selectedItemText"
-                        //}
-                        val intent = Intent(this.activity, ExerciseBegin::class.java)
-                        intent.putExtra("workout",new_workout)
-                        startActivity(intent)
-
-
-                    }*/
             }
         }
     }
