@@ -38,8 +38,9 @@ class WorkoutScreen : AppCompatActivity() {
         val workoutNameDisplay = findViewById<TextView>(R.id.workout_name)
         workoutNameDisplay.text = workoutname
 
-        // URL : http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/3
-        doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/3")
+        val exercises = ArrayList<Exercise>() //This will hold all the exercises for the workout
+
+        doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/$workoutID",exercises)
 
 
         mTextViewCountDown = findViewById(R.id.text_timer_reps)
@@ -68,7 +69,7 @@ class WorkoutScreen : AppCompatActivity() {
     }
 
 
-    private fun doAsychCallWorkout(url : String) {
+    private fun doAsychCallWorkout(url : String, exercises: ArrayList<Exercise>) {
         doAsync() {
             var result = URL(url).readText()
             val workoutInfo = ArrayList<String>()
@@ -80,16 +81,10 @@ class WorkoutScreen : AppCompatActivity() {
                 result.length
             )
 
-            //Result
-            // "WorkoutID":3,"UserID":3,"ContainsExercises":"16,5,3,7,9","NumReps":"0,10,15,0,0","NumTime":"3,0,0,2,1","WorkoutName":"Test3"
-
             val split_result = result.split(",\"").toTypedArray()
             for (i in split_result) {
-                val exercise_info = i.split("\":").toTypedArray() //Splits then up by row
-                //count += 1
+                val exercise_info = i.split("\":").toTypedArray()
                 for (j in exercise_info) {
-                        //println("J")
-                        //println(j)
                         workoutInfo.add(j)
                 }
             }
@@ -101,47 +96,73 @@ class WorkoutScreen : AppCompatActivity() {
             //Gets rid of the ""
             workoutInfo[5] = workoutInfo[5].removeRange(0,1)
             workoutInfo[5] = workoutInfo[5].removeRange(workoutInfo[5].length-1,workoutInfo[5].length)
-            println("ExercisesID" + workoutInfo[5])
 
             var repsSlot = 7
+            workoutInfo[7] = workoutInfo[7].removeRange(0,1)
+            workoutInfo[7] = workoutInfo[7].removeRange(workoutInfo[7].length-1,workoutInfo[7].length)
+
             var timeSlot = 9
+            workoutInfo[9] = workoutInfo[9].removeRange(0,1)
+            workoutInfo[9] = workoutInfo[9].removeRange(workoutInfo[9].length-1,workoutInfo[9].length)
+
             var nameSlot = 11
 
-            //val exerciseIDs = ArrayList<String>() //Holds workout Exercises
-            //val reps = ArrayList<String>()
-            //val times = ArrayList<String>()
-
-            //Reps and time are in exercise object
-
             val exerciseIDs = workoutInfo[5].split(",").toTypedArray()
-            println("SE")
-            for (i in exerciseIDs){
-                println(i)
-            }
-
             val reps = workoutInfo[7].split(",").toTypedArray()
             val times = workoutInfo[9].split(",").toTypedArray()
-            //for (i in workoutInfo[5]){
-           //     exerciseIDs.add(i.toString())
-           //     println("i" + i)
-           // }
+            val tempExerciseInfo = ArrayList<String>()
+            var count = 0 //This will keep track of the reps and time for each exercise
 
-            // URL
-            // http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/id/2
+            for (i in exerciseIDs) {
+                //Pull Exercise from Database
+                var eResult = URL("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/id/$i").readText()
 
-            // Pull Exercises Result
-            // {"status":200,"error":null,"response":[{"ExerciseID":2,"ExerciseName":"Crunches","ExerciseCatagory":"Abdominals","ExerciseDifficulty":"Beginner\r","ExerciseImage":"https://sovita.s3.amazonaws.com/WorkoutGifs/crunches.gif"}]}
+                eResult = eResult.removeRange(0, 41) //Gets rid of the header
+                //Gets rid of the extra }]} at the end
+                eResult = eResult.removeRange(
+                    eResult.length - 3,
+                    eResult.length
+                )
 
-            /*for(i in 0..count-1){
-                val name = workoutInfo[nameSlot]
-                name.removeRange(0,1)
-                name.removeRange(name.length-1,name.length)
-                workoutName.add(name)
-                workoutID.add(workoutInfo[idSlot])
-                nameSlot += 12
-                idSlot += 12
+                val split_result2 = eResult.split(",\"").toTypedArray()
+                for (i in split_result2) {
+                    val exercise_info2 = i.split("\":").toTypedArray()
+                    for (j in exercise_info2) {
+                        println("J2")
+                        println(j)
+                        tempExerciseInfo.add(j)
+                    }
+                }
 
-            }*/
+                var eIDslot = 1
+                var eNameslot = 3
+
+                //Gets rid of ""
+                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(0,1)
+                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(tempExerciseInfo[3].length-1,tempExerciseInfo[3].length)
+
+                var eCataslot = 5
+                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(0,1)
+                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(tempExerciseInfo[5].length-1,tempExerciseInfo[5].length)
+
+                var eDiffslot = 7
+
+                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(0,1)
+                //This one has a /r for some reson
+                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(tempExerciseInfo[7].length-3,tempExerciseInfo[7].length)
+
+                var eImage = 9
+                //Leave the qoute because we need for url
+
+                //Create Exercise Objects
+                exercises.add(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
+                exercises[count].setReps(reps[count].toInt())
+                exercises[count].setTime(times[count].toInt())
+                count += 1
+                tempExerciseInfo.clear()
+            }
+
+
             uiThread {
 
             }
