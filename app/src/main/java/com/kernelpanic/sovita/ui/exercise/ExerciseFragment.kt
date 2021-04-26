@@ -12,26 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.kernelpanic.sovita.Exercise
-import com.kernelpanic.sovita.NewWorkout
-import com.kernelpanic.sovita.R
-import com.kernelpanic.sovita.Workout
 import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import java.net.URL
 import android.widget.ArrayAdapter
+import com.kernelpanic.sovita.*
 import org.jetbrains.anko.uiThread
 
 
 class ExerciseFragment: Fragment()  {
-    private lateinit var exerciseViewModel: ExerciseViewModel
-
-    private lateinit var exerciseTextView: TextView
-    private lateinit var workoutButton: FloatingActionButton
-
-    private lateinit var workout: Workout
-    private lateinit var userWorkouts: ArrayList<Workout>
     private lateinit var listWorkouts:ListView
+
+    private lateinit var selectedworkout: String
+    private lateinit var selectedItemText: String
 
 
     // fun OnCreate(savedInstanceState: Bundle?) {
@@ -53,17 +46,12 @@ class ExerciseFragment: Fragment()  {
 
         val workoutNames = ArrayList<String>()
         val workoutID = ArrayList<String>()
+
         listWorkouts = view.findViewById(R.id.workout_list)
+
 
         //This will pull all the users workouts
         doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/userid/3",workoutNames,listWorkouts,workoutID)
-
-        //println("Final Workout Names")
-        //for (i in 0..(workoutNames.size-1)){
-        //    println(workoutNames[i])
-        //}
-
-
 
 
         //This makes the + button on the exercise screen work so that it leads you to the new workout screen
@@ -73,7 +61,28 @@ class ExerciseFragment: Fragment()  {
             startActivity(intent)
         }
 
+        val textView = view?.findViewById<TextView>(R.id.test)
 
+        //Listivew for all the workouts
+        listWorkouts.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    selectedItemText = parent.getItemAtPosition(position) as String
+                    selectedworkout = workoutID[position]
+
+                    if (textView != null) {
+                        textView.text = (selectedItemText)
+                    }
+                }
+
+        //Button to start the workout
+        val startWorkout = view?.findViewById<Button>(R.id.startWorkout)
+        startWorkout?.setOnClickListener {
+            //How you pass objects here to next
+            val intent = Intent(this.activity, WorkoutScreen::class.java)
+            intent.putExtra("workout",selectedItemText)
+            intent.putExtra("workoutID", selectedworkout)
+            startActivity(intent)
+        }
 
 
         //I don't know what this is for now so I commented it out -- exerciseViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -84,9 +93,18 @@ class ExerciseFragment: Fragment()  {
         return view
         }
 
+    /*private fun open(selectedworkout : String){
+        val intent = Intent(this.activity, ExerciseBegin::class.java)
+        //intent.putExtra("workout",selectedWorkout)
+        startActivity(intent)
+    }*/
+
+
+
+
     private fun doAsychcall(url: String, workoutName: ArrayList<String>, listworkouts: ListView, workoutID: ArrayList<String>) {
         doAsync() {
-            println("Here!!!")
+            //println("Here!!!")
             var result = URL(url).readText()
             //URL(url).apply { }
 
@@ -138,6 +156,7 @@ class ExerciseFragment: Fragment()  {
                 workoutID.add(workoutInfo[idSlot])
                 //println("Name added:" + name)
                 nameSlot += 12
+                idSlot += 12
 
             }
             uiThread {
@@ -148,17 +167,22 @@ class ExerciseFragment: Fragment()  {
                     )
                 }
 
-                val textView = view?.findViewById<TextView>(R.id.test)
+                //val textView = view?.findViewById<TextView>(R.id.test)
 
                 listWorkouts.adapter = adapter
-                listWorkouts.onItemClickListener =
+                /*listWorkouts.onItemClickListener =
                     AdapterView.OnItemClickListener { parent, view, position, id ->
                         val selectedItemText = parent.getItemAtPosition(position)
                         val selectedWorkout = workoutID[position]
-                        if (textView != null) {
-                            textView.text = "Selected : $selectedItemText"
-                        }
-                    }
+                        //if (textView != null) {
+                        //    textView.text = "Selected : $selectedItemText"
+                        //}
+                        val intent = Intent(this.activity, ExerciseBegin::class.java)
+                        intent.putExtra("workout",new_workout)
+                        startActivity(intent)
+
+
+                    }*/
             }
         }
     }
