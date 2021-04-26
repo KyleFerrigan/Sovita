@@ -4,6 +4,7 @@
     package="com.kernelpanic.sovita">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovita"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ExerciseBegin2"></activity>
+        <activity android:name=".StartWorkout" />
+        <activity android:name=".WorkoutScreen" />
         <activity
             android:name=".WorkoutSaved"
             android:label="@string/title_activity_workout_saved"
-            android:theme="@style/Theme.Sovita.NoActionBar"></activity>
+            android:theme="@style/Theme.Sovita.NoActionBar" />
         <activity android:name=".WorkoutEdit" />
         <activity android:name=".NewWorkout_2" />
         <activity android:name=".NewWorkout" />
@@ -30,6 +34,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

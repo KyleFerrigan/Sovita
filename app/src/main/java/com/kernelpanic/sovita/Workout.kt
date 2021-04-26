@@ -2,8 +2,9 @@ package com.kernelpanic.sovita
 
 import java.io.Serializable
 
-data class Workout (val name: String, val _exercises: ArrayList<Exercise>): Serializable {
+data class Workout (val name: String, val _exercises: ArrayList<Exercise>, var workoutID: Int): Serializable {
     private var _workoutName: String = name
+    private var _workoutID : Int = workoutID
     //private var _exercises: ArrayList<Exercise>
 
     fun addExercise(exercise: Exercise) {
@@ -52,5 +53,49 @@ data class Workout (val name: String, val _exercises: ArrayList<Exercise>): Seri
     }
     fun setExerciseTime(index:Int, time:Int) {
         _exercises[index].setTime(time)
+    }
+
+    fun getWorkoutID_() : Int {
+        return _workoutID
+    }
+
+    fun getExerciseReps() : String {
+     //Get string list of reps for each exercise
+        var reps = ""
+        for (i in 0.._exercises.size-1) {
+            if(i == _exercises.size-1) {
+                reps = reps + _exercises[i].getReps()
+            } else {
+                reps = reps + _exercises[i].getReps() + ","
+            }
+        }
+        println("Reps:" + reps)
+        return reps
+    }
+    fun getExerciseTimes() : String {
+        //Get string list of reps for each exercise
+        var time = ""
+        for (i in 0.._exercises.size-1) {
+            if(i == _exercises.size-1) {
+                time = time + _exercises[i].getTime()
+            } else {
+                time = time + _exercises[i].getTime() + ","
+            }
+        }
+        println("Time:" + time)
+        return time
+    }
+    fun getExerciseIDs() : String {
+        //Get string list of reps for each exercise
+        var id = ""
+        for (i in 0.._exercises.size-1) {
+            if(i == _exercises.size-1) {
+                id = id + _exercises[i].getiD()
+            } else {
+                id = id + _exercises[i].getiD() + ","
+            }
+        }
+        println("ID:" + id)
+        return id
     }
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 // Add an image as parameter later on
 //This holds the exercise
-class Exercise(val _name: String, val _category: String, val _difficulty: String, val _imageLink: String) {
+class Exercise(val _name: String, val _category: String, val _difficulty: String, val _imageLink: String, val _id : String): Serializable {
     //From what I found online, there is no constructor, you just set the variables in the header
     //Member variables
     private var _reps: Int = 0
@@ -36,6 +36,10 @@ class Exercise(val _name: String, val _category: String, val _difficulty: String
 
     fun getName(): String {
         return _name
+    }
+
+    fun getiD() : String {
+        return _id
     }
 
     fun getCatagory(): String {
