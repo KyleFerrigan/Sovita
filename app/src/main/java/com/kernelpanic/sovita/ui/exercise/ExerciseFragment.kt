@@ -26,7 +26,7 @@ class ExerciseFragment: Fragment()  {
     private lateinit var selectedworkout: String
     private lateinit var selectedItemText: String
 
-
+    private lateinit var workout: Workout
     // fun OnCreate(savedInstanceState: Bundle?) {
      //   super.onCreate(savedInstanceState)
 
@@ -68,7 +68,9 @@ class ExerciseFragment: Fragment()  {
                 AdapterView.OnItemClickListener { parent, view, position, id ->
                     selectedItemText = parent.getItemAtPosition(position) as String
                     selectedworkout = workoutID[position]
-
+                    val exercises = ArrayList<Exercise>()
+                    workout = Workout(selectedItemText, exercises, selectedworkout.toInt())
+                    doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/$selectedworkout", workout)
                     if (textView != null) {
                         textView.text = (selectedItemText)
                     }
@@ -77,10 +79,8 @@ class ExerciseFragment: Fragment()  {
         //Button to start the workout
         val startWorkout = view?.findViewById<Button>(R.id.startWorkout)
         startWorkout?.setOnClickListener {
-            //How you pass objects here to next
             val intent = Intent(this.activity, WorkoutScreen::class.java)
-            intent.putExtra("workout",selectedItemText)
-            intent.putExtra("workoutID", selectedworkout)
+            intent.putExtra("workout2",workout)
             startActivity(intent)
         }
 
@@ -149,26 +149,121 @@ class ExerciseFragment: Fragment()  {
                     )
                 }
 
-                //val textView = view?.findViewById<TextView>(R.id.test)
-
                 listWorkouts.adapter = adapter
-                /*listWorkouts.onItemClickListener =
-                    AdapterView.OnItemClickListener { parent, view, position, id ->
-                        val selectedItemText = parent.getItemAtPosition(position)
-                        val selectedWorkout = workoutID[position]
-                        //if (textView != null) {
-                        //    textView.text = "Selected : $selectedItemText"
-                        //}
-                        val intent = Intent(this.activity, ExerciseBegin::class.java)
-                        intent.putExtra("workout",new_workout)
-                        startActivity(intent)
 
-
-                    }*/
             }
         }
     }
 
+    private fun doAsychCallWorkout(url : String, workout: Workout) {
+        doAsync() {
+            var result = URL(url).readText()
+            val workoutInfo = ArrayList<String>()
 
+            result = result.removeRange(0, 41) //Gets rid of the header
+            //Gets rid of the extra }]} at the end
+            result = result.removeRange(
+                    result.length - 3,
+                    result.length
+            )
+
+            val split_result = result.split(",\"").toTypedArray()
+            for (i in split_result) {
+                val exercise_info = i.split("\":").toTypedArray()
+                for (j in exercise_info) {
+                    workoutInfo.add(j)
+                }
+            }
+
+            var idSlot = 1
+            var useridSlot = 3
+            var exercisesSlot = 5
+
+            //Gets rid of the ""
+            workoutInfo[5] = workoutInfo[5].removeRange(0,1)
+            workoutInfo[5] = workoutInfo[5].removeRange(workoutInfo[5].length-1,workoutInfo[5].length)
+
+            var repsSlot = 7
+            workoutInfo[7] = workoutInfo[7].removeRange(0,1)
+            workoutInfo[7] = workoutInfo[7].removeRange(workoutInfo[7].length-1,workoutInfo[7].length)
+
+            var timeSlot = 9
+            workoutInfo[9] = workoutInfo[9].removeRange(0,1)
+            workoutInfo[9] = workoutInfo[9].removeRange(workoutInfo[9].length-1,workoutInfo[9].length)
+
+            var nameSlot = 11
+
+            val exerciseIDs = workoutInfo[5].split(",").toTypedArray()
+            val reps = workoutInfo[7].split(",").toTypedArray()
+            val times = workoutInfo[9].split(",").toTypedArray()
+            val tempExerciseInfo = ArrayList<String>()
+            var count = 0 //This will keep track of the reps and time for each exercise
+
+
+
+            for (i in exerciseIDs) {
+                //Pull Exercise from Database
+                var eResult = URL("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/id/$i").readText()
+
+                eResult = eResult.removeRange(0, 41) //Gets rid of the header
+                //Gets rid of the extra }]} at the end
+                eResult = eResult.removeRange(
+                        eResult.length - 3,
+                        eResult.length
+                )
+
+
+                val split_result2 = eResult.split(",\"").toTypedArray()
+                for (i in split_result2) {
+                    val exercise_info2 = i.split("\":").toTypedArray()
+                    for (j in exercise_info2) {
+                        //println("J2")
+                        //println(j)
+                        tempExerciseInfo.add(j)
+                    }
+                }
+
+                var eIDslot = 1
+                var eNameslot = 3
+
+                //Gets rid of ""
+                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(0,1)
+                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(tempExerciseInfo[3].length-1,tempExerciseInfo[3].length)
+
+                var eCataslot = 5
+                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(0,1)
+                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(tempExerciseInfo[5].length-1,tempExerciseInfo[5].length)
+
+                var eDiffslot = 7
+
+                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(0,1)
+                //This one has a /r for some reson
+                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(tempExerciseInfo[7].length-3,tempExerciseInfo[7].length)
+
+                var eImage = 9
+                //Leave the qoute because we need for url
+
+                workout.addExercise(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
+                workout.setExerciseReps(count,reps[count].toInt())
+                workout.setExerciseTime(count,times[count].toInt())
+
+                println("Workout " + workout.getExerciseName(count))
+                println("Reps " + workout.getExerciseReps(count))
+                println("Time " + workout.getExerciseTime(count))
+                println("Diff " + workout.getExerciseDifficulty(count))
+                println("Cata " + workout.getExerciseCatagory(count))
+
+                count += 1
+                tempExerciseInfo.clear()
+            }
+
+
+
+            uiThread {
+
+            }
+
+        }
+    }
 
 }
