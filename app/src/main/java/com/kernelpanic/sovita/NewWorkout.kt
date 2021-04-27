@@ -334,6 +334,7 @@ class NewWorkout : AppCompatActivity() {
                 //The qoutes may be a problem or may not in the link I'm not sure
                 final_ex_info[9] = final_ex_info[9].removeRange(0,1)
                 final_ex_info[9] = final_ex_info[9].removeRange(final_ex_info[9].length-1,final_ex_info[9].length)
+                println("Link: " + final_ex_info[9])
 
                 exerciseID.add(final_ex_info[1])
                 exerciseList.add(Exercise(final_ex_info[3],final_ex_info[5],final_ex_info[7],final_ex_info[9],final_ex_info[1]))

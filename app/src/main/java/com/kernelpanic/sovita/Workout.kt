@@ -98,4 +98,7 @@ data class Workout (val name: String, val _exercises: ArrayList<Exercise>, var w
         println("ID:" + id)
         return id
     }
+    fun getExerciseImage(index : Int) : String {
+        return _exercises[index].getImageLink()
+    }
 }
