@@ -23,6 +23,8 @@ class WorkoutEdit : AppCompatActivity() {
 
         val intent = intent
         val workout: Workout = intent.getSerializableExtra("workout") as Workout
+
+
       //  val exerciseIDs = intent.getStringArrayListExtra("exerciseID")
         /*
         var exerciseIDStr = ""

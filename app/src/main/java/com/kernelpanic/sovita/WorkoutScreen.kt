@@ -35,14 +35,14 @@ class WorkoutScreen : AppCompatActivity() {
 
 
         val intent = intent
-        val workoutname : String? = intent.getStringExtra("workout")
-        val workoutID : String? = intent.getStringExtra("workoutID")
+        val workout: Workout = intent.getSerializableExtra("workout2") as Workout //Has the workout
+        val workoutName = workout.getWorkoutName()
         val workoutNameDisplay = findViewById<TextView>(R.id.workout_name)
-        workoutNameDisplay.text = workoutname
+        workoutNameDisplay.text = workoutName
 
-        exercises = ArrayList<Exercise>() //This will hold all the exercises for the workout
-
-        doAsychCallWorkout("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Workouts/id/$workoutID")
+        //println("Workout exercises: " + workout.getExerciseIDs())
+        //println("Reps: " + workout.getExerciseReps())
+        //println("TIme: " + workout.getExerciseTimes())
 
 
         mTextViewCountDown = findViewById(R.id.text_timer_reps)
@@ -69,116 +69,6 @@ class WorkoutScreen : AppCompatActivity() {
         }
         updateCountDownText()
     }
-
-
-    private fun doAsychCallWorkout(url : String) {
-        doAsync() {
-            var result = URL(url).readText()
-            val workoutInfo = ArrayList<String>()
-
-            result = result.removeRange(0, 41) //Gets rid of the header
-            //Gets rid of the extra }]} at the end
-            result = result.removeRange(
-                result.length - 3,
-                result.length
-            )
-
-            val split_result = result.split(",\"").toTypedArray()
-            for (i in split_result) {
-                val exercise_info = i.split("\":").toTypedArray()
-                for (j in exercise_info) {
-                        workoutInfo.add(j)
-                }
-            }
-
-            var idSlot = 1
-            var useridSlot = 3
-            var exercisesSlot = 5
-
-            //Gets rid of the ""
-            workoutInfo[5] = workoutInfo[5].removeRange(0,1)
-            workoutInfo[5] = workoutInfo[5].removeRange(workoutInfo[5].length-1,workoutInfo[5].length)
-
-            var repsSlot = 7
-            workoutInfo[7] = workoutInfo[7].removeRange(0,1)
-            workoutInfo[7] = workoutInfo[7].removeRange(workoutInfo[7].length-1,workoutInfo[7].length)
-
-            var timeSlot = 9
-            workoutInfo[9] = workoutInfo[9].removeRange(0,1)
-            workoutInfo[9] = workoutInfo[9].removeRange(workoutInfo[9].length-1,workoutInfo[9].length)
-
-            var nameSlot = 11
-
-            val exerciseIDs = workoutInfo[5].split(",").toTypedArray()
-            val reps = workoutInfo[7].split(",").toTypedArray()
-            val times = workoutInfo[9].split(",").toTypedArray()
-            val tempExerciseInfo = ArrayList<String>()
-            var count = 0 //This will keep track of the reps and time for each exercise
-
-
-            val exercises2 = ArrayList<Exercise>()
-            for (i in exerciseIDs) {
-                //Pull Exercise from Database
-                var eResult = URL("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/id/$i").readText()
-
-                eResult = eResult.removeRange(0, 41) //Gets rid of the header
-                //Gets rid of the extra }]} at the end
-                eResult = eResult.removeRange(
-                    eResult.length - 3,
-                    eResult.length
-                )
-
-
-                val split_result2 = eResult.split(",\"").toTypedArray()
-                for (i in split_result2) {
-                    val exercise_info2 = i.split("\":").toTypedArray()
-                    for (j in exercise_info2) {
-                        //println("J2")
-                        //println(j)
-                        tempExerciseInfo.add(j)
-                    }
-                }
-
-                var eIDslot = 1
-                var eNameslot = 3
-
-                //Gets rid of ""
-                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(0,1)
-                tempExerciseInfo[3] = tempExerciseInfo[3].removeRange(tempExerciseInfo[3].length-1,tempExerciseInfo[3].length)
-
-                var eCataslot = 5
-                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(0,1)
-                tempExerciseInfo[5] = tempExerciseInfo[5].removeRange(tempExerciseInfo[5].length-1,tempExerciseInfo[5].length)
-
-                var eDiffslot = 7
-
-                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(0,1)
-                //This one has a /r for some reson
-                tempExerciseInfo[7] = tempExerciseInfo[7].removeRange(tempExerciseInfo[7].length-3,tempExerciseInfo[7].length)
-
-                var eImage = 9
-                //Leave the qoute because we need for url
-
-                //Create Exercise Objects
-                exercises2.add(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
-                exercises2[count].setReps(reps[count].toInt())
-                exercises2[count].setTime(times[count].toInt())
-                println("ex" + exercises2[count].getName())
-                count += 1
-                tempExerciseInfo.clear()
-            }
-
-
-            uiThread {
-
-                for (i in exercises2) {
-                    exercises.add(Exercise(i.getName(),i._category,i.getDifficulty(),i._imageLink,i.getiD()))
-                }
-
-            }
-        }
-    }
-
 
     @SuppressLint("SetTextI18n")
     fun startTimer() { //start timer
