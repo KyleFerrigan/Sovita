@@ -180,11 +180,6 @@ class NewWorkout : AppCompatActivity() {
 
         }
 
-        prevButton = findViewById(R.id.prev_button)
-        prevButton.setOnClickListener{
-            finish()
-        }
-
 
         abExercises = ArrayList<Exercise>()
         abExercisesID = ArrayList<String>() //Parellel to abExercises
