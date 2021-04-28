@@ -32,21 +32,3 @@ public fun addWorkoutData(workoutIDIn: String, userIDIn: String, containsExercis
         "2,4,6", "7,2,3", "kyleTest but in kotlin 5"
     );
 }*/
-
-//Dont worry about below just archive
-/*fun oldpostver(workoutIDIn: String, userIDIn: String, containsExercisesIn: String, numRepsin: String, numTimeIn: String, workoutNameIn: String) {
-    // Create okhttp3 form body builder.
-    //val formBodyBuilder: FormBody.Builder = FormBody.Builder()
-
-    // Add form parameters
-    //formBodyBuilder.add("UserID", userIDIn)
-    //formBodyBuilder.add("ContainsExercises", containsExercisesIn)
-    //formBodyBuilder.add("NumReps", numRepsin)
-    //formBodyBuilder.add("NumTime", numTimeIn)
-    //formBodyBuilder.add("WorkoutName", workoutNameIn)
-
-    // Build form body.
-    //val formBody: FormBody = formBodyBuilder.build()
-
-    //builder = builder.post(formBody)
-}*/
