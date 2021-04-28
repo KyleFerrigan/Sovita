@@ -27,12 +27,13 @@ class ChatFragment : Fragment() {
         val textView2: TextView = root.findViewById(R.id.text_notifications2)
         val textView3: TextView = root.findViewById(R.id.text_notifications3)
         val textView4: TextView = root.findViewById(R.id.text_notifications4)
-        chatViewModel.text.observe(viewLifecycleOwner, {
+        /*chatViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
             textView2.text = it
-            textView3.text = it
-            textView4.text = it
-        })
+           textView3.text = it
+           textView4.text = it
+
+        })*/
         return root
     }
 }

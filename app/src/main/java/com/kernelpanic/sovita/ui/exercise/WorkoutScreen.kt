@@ -12,7 +12,6 @@ import android.webkit.WebView
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.kernelpanic.sovita.R
-import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
