@@ -14,16 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovita"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ExerciseBegin2"></activity>
-        <activity android:name=".StartWorkout" />
-        <activity android:name=".WorkoutScreen" />
+        <activity android:name=".ui.exercise.ExerciseBegin2"></activity>
+        <activity android:name=".ui.exercise.StartWorkout" />
+        <activity android:name=".ui.exercise.WorkoutScreen" />
         <activity
-            android:name=".WorkoutSaved"
+            android:name=".ui.exercise.WorkoutSaved"
             android:label="@string/title_activity_workout_saved"
             android:theme="@style/Theme.Sovita.NoActionBar" />
-        <activity android:name=".WorkoutEdit" />
+        <activity android:name=".ui.exercise.WorkoutEdit" />
         <activity android:name=".NewWorkout_2" />
-        <activity android:name=".NewWorkout" />
+        <activity android:name=".ui.exercise.NewWorkout" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

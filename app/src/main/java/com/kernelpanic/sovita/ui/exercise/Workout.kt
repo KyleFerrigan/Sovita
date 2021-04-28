@@ -1,5 +1,6 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
+import com.kernelpanic.sovita.ui.exercise.Exercise
 import java.io.Serializable
 
 data class Workout (val name: String, val _exercises: ArrayList<Exercise>, var workoutID: Int): Serializable {

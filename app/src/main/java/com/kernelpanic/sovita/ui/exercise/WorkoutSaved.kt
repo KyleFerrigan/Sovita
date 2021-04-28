@@ -1,11 +1,11 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.MainActivity
+import com.kernelpanic.sovita.R
 
 class WorkoutSaved : AppCompatActivity() {
 private lateinit var okButton : Button

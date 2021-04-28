@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.media.Image
 import java.net.URL
