@@ -41,6 +41,7 @@
                     android:hint="@string/enter_workoutName"
                     android:inputType="text"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     app:layout_constraintEnd_toStartOf="@+id/save_workout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
