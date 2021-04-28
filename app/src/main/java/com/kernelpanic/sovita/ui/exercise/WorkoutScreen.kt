@@ -1,23 +1,13 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
-import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import java.net.URL
+import com.kernelpanic.sovita.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 //Some of this code was obtained from YouTube and other helpful sources
