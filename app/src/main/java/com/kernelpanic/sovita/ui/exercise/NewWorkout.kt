@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.CustomAdapter
+import com.kernelpanic.sovita.R
 import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import java.net.URL
@@ -14,7 +16,6 @@ import java.net.URL
 class NewWorkout : AppCompatActivity() {
 
     private lateinit var prevButton: Button
-
 
     //Holds all the users workouts, don't know if this belongs here or if we need it but it's here
     private lateinit var user_workouts: ArrayList<Workout>
@@ -81,6 +82,8 @@ class NewWorkout : AppCompatActivity() {
 
     private lateinit var workout_name: EditText
     private lateinit var save_workoutButton: Button
+    private lateinit var exercisesID: ArrayList<String>
+    private var workoutID : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +94,8 @@ class NewWorkout : AppCompatActivity() {
 
         save_workoutButton = findViewById(R.id.save_workout)
         all_exercises = ArrayList<Exercise>()
+        exercisesID = ArrayList<String>()
+
 
         save_workoutButton.setOnClickListener {
             //DIsplay message? like :Are you sure you want to save?
@@ -99,81 +104,86 @@ class NewWorkout : AppCompatActivity() {
             for(i in 0 until abExercises.size) {
                 if (abExercises[i].isChecked()){
                     all_exercises.add(abExercises[i])
+                    exercisesID.add(abExercisesID[i])
                 }
             }
 
             for(i in 0 until backExercises.size) {
                 if (backExercises[i].isChecked()){
                     all_exercises.add(backExercises[i])
+                    exercisesID.add(backExercisesID[i])
                 }
             }
 
             for(i in 0 until bicepExercises.size) {
                 if (bicepExercises[i].isChecked()){
                     all_exercises.add(bicepExercises[i])
+                    exercisesID.add(bicepExercisesID[i])
                 }
             }
 
             for(i in 0 until calvesExercises.size) {
                 if (calvesExercises[i].isChecked()){
                     all_exercises.add(calvesExercises[i])
+                    exercisesID.add(calvesExercisesID[i])
                 }
             }
 
             for(i in 0 until chestExercises.size) {
                 if (chestExercises[i].isChecked()){
                     all_exercises.add(chestExercises[i])
+                    exercisesID.add(chestExercisesID[i])
                 }
             }
 
             for(i in 0 until gluteExercises.size) {
                 if (gluteExercises[i].isChecked()){
                     all_exercises.add(gluteExercises[i])
+                    exercisesID.add(chestExercisesID[i])
                 }
             }
 
             for(i in 0 until hamstringExercises.size) {
                 if (hamstringExercises[i].isChecked()){
                     all_exercises.add(hamstringExercises[i])
+                    exercisesID.add(hamstringExercisesID[i])
                 }
             }
 
             for(i in 0 until quadExercises.size) {
                 if (quadExercises[i].isChecked()){
                     all_exercises.add(quadExercises[i])
+                    exercisesID.add(quadExercisesID[i])
                 }
             }
 
             for(i in 0 until shoulderExercises.size) {
                 if (shoulderExercises[i].isChecked()){
                     all_exercises.add(shoulderExercises[i])
+                    exercisesID.add(shoulderExercisesID[i])
                 }
             }
 
             for(i in 0 until tricepExercises.size) {
                 if (tricepExercises[i].isChecked()){
                     all_exercises.add(tricepExercises[i])
+                    exercisesID.add(tricepExercisesID[i])
                 }
             }
 
             //Creates the workout will the entered name and all exercises that were checked
-            new_workout = Workout(workout_name.text.toString(), all_exercises)
-
-            //print(new_workout.getExerciseName(0))
+            new_workout = Workout(workout_name.text.toString(), all_exercises, workoutID)
 
             val intent = Intent(this@NewWorkout, WorkoutEdit::class.java)
+            intent.putExtra("workout",new_workout)
             startActivity(intent)
 
-            //Add to list or database..I think it's database
-            //user_workouts.add(Workout(workout_name.toString(), all_exercises))
         }
 
         prevButton = findViewById(R.id.prev_button)
         prevButton.setOnClickListener{
             finish()
         }
-
-
 
 
         abExercises = ArrayList<Exercise>()
@@ -216,6 +226,10 @@ class NewWorkout : AppCompatActivity() {
         doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/Catagory/Quads", quadExercisesID, quadExercises)
         doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/Catagory/Shoulders", shoulderExercisesID, shoulderExercises)
         doAsychcall("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/Exercises/Catagory/Triceps", tricepExercisesID, tricepExercises)
+        getLastID("http://ec2-13-58-150-155.us-east-2.compute.amazonaws.com:3000/workouts")
+        workoutID += 1 //Increase count by one so it's always unique
+
+
 
         absButton = findViewById(R.id.abs_catagory)
         backButton = findViewById(R.id.back_catagory)
@@ -322,10 +336,10 @@ class NewWorkout : AppCompatActivity() {
                 //The qoutes may be a problem or may not in the link I'm not sure
                 final_ex_info[9] = final_ex_info[9].removeRange(0,1)
                 final_ex_info[9] = final_ex_info[9].removeRange(final_ex_info[9].length-1,final_ex_info[9].length)
+                println("Link: " + final_ex_info[9])
 
                 exerciseID.add(final_ex_info[1])
-                exerciseList.add(Exercise(final_ex_info[3],final_ex_info[5],final_ex_info[7],final_ex_info[9]))
-
+                exerciseList.add(Exercise(final_ex_info[3], final_ex_info[5], final_ex_info[7], final_ex_info[9], final_ex_info[1]))
                 final_ex_info.clear()
 
             }
@@ -334,6 +348,28 @@ class NewWorkout : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun getLastID(url:String) {
+        doAsync {
+            var count = 1
+            var result = URL(url).readText()
+            val workout_info = ArrayList<String>()
+
+            result = result.removeRange(0, 40) //Gets rid of the header
+            result = result.removeRange(result.length - 3, result.length) //Gets rid of the extra }]} at the end
+            val split_result = result.split("},{").toTypedArray() //Splits then up by row aka by workout
+
+            for (i in split_result) {
+                count += 1 //Let's us know how many workouts we have so we know the id
+            }
+
+            activityUiThread {
+                //Can't return the count from asyc function, need to set the variable in the UI thread for the value to save
+                workoutID = count
+            }
+        }
+
     }
 
 

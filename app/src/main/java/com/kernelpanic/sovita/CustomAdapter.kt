@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.TextView
 import java.util.*
-import android.widget.PopupMenu
+import com.kernelpanic.sovita.ui.exercise.Exercise
 
 //This class is what is responsible for displaying the exercise list along with the checkboxes
 class CustomAdapter(private val dataSet: ArrayList<Exercise>, mContext: Context) :

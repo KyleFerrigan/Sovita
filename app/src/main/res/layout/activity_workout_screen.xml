@@ -4,70 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkoutScreen">
+    tools:context=".ui.exercise.WorkoutScreen">
 
-    <TextView
-        android:id="@+id/text_timer_reps"
-        android:layout_width="159dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="485dp"
-        android:text="@string/_00_00"
-        android:textColor="@android:color/black"
-        android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_start_pause"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_reset"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="113dp"
-        android:text="@string/reset"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_start_pause"
-        app:layout_constraintTop_toBottomOf="@+id/text_timer_reps"
-        tools:visibility="visible" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button_start_pause"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="113dp"
-        android:text="@string/start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_reset"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name" />
+        <TextView
+            android:id="@+id/workout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/workout_name"
+            android:gravity="center"
+            android:textSize="30sp" />
 
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_timer_reps"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name"
-        app:layout_constraintVertical_bias="0.0" />
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/workout_name"
-        android:layout_width="217dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="494dp"
-        android:text="@string/workout_name"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_start_pause"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/text_timer_reps"
+            android:layout_width="159dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="485dp"
+            android:text="@string/_00_00"
+            android:textColor="@android:color/black"
+            android:textSize="60sp"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:text="Back" />
+
+            <Button
+                android:id="@+id/button_start_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/start" />
+
+            <Button
+                android:id="@+id/button_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/reset" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Next" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

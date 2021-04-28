@@ -4,23 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WorkoutEdit">
+    tools:context=".ui.exercise.WorkoutEdit">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center" >
+        android:gravity="top" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/workout_name" />
+            android:id="@+id/workout_name"
+            android:textSize="@dimen/header_size"
+            android:gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/exercise_name" />
+            android:id="@+id/exercise_name"
+            android:textSize="@dimen/subheader_size"/>
 
         <EditText
             android:layout_width="match_parent"
