@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.R
+import com.kernelpanic.sovita.addWorkoutData
 import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 
@@ -96,8 +98,8 @@ class WorkoutEdit : AppCompatActivity() {
             } else {
                 doAsync {
                     addWorkoutData(
-                        workout.getWorkoutID_().toString(), "3", workout.getExerciseIDs(),
-                        workout.getExerciseReps(), workout.getExerciseTimes(), workout.getWorkoutName()
+                            workout.getWorkoutID_().toString(), "3", workout.getExerciseIDs(),
+                            workout.getExerciseReps(), workout.getExerciseTimes(), workout.getWorkoutName()
                     )
                     println("Here333")
                     activityUiThread {

@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -9,13 +9,10 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.R
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 

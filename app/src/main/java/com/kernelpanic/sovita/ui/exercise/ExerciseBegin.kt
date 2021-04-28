@@ -1,15 +1,10 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import android.content.Intent
 
-import android.widget.Button
-import android.widget.EditText
-
-import org.jetbrains.anko.activityUiThread
-import org.jetbrains.anko.doAsync
+import com.kernelpanic.sovita.R
 
 
 class ExerciseBegin : AppCompatActivity() {

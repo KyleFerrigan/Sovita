@@ -1,18 +1,13 @@
 package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import java.net.URL
 import android.widget.ArrayAdapter
@@ -243,7 +238,7 @@ class ExerciseFragment: Fragment()  {
                 var eImage = 9
                 //Leave the qoute because we need for url
 
-                workout.addExercise(Exercise(tempExerciseInfo[3],tempExerciseInfo[5],tempExerciseInfo[7],tempExerciseInfo[9],tempExerciseInfo[1]))
+                workout.addExercise(Exercise(tempExerciseInfo[3], tempExerciseInfo[5], tempExerciseInfo[7], tempExerciseInfo[9], tempExerciseInfo[1]))
                 workout.setExerciseReps(count,reps[count].toInt())
                 workout.setExerciseTime(count,times[count].toInt())
 

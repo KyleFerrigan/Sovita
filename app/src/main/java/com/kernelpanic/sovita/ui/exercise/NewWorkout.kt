@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita
+package com.kernelpanic.sovita.ui.exercise
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.CustomAdapter
+import com.kernelpanic.sovita.R
 import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import java.net.URL
@@ -337,7 +339,7 @@ class NewWorkout : AppCompatActivity() {
                 println("Link: " + final_ex_info[9])
 
                 exerciseID.add(final_ex_info[1])
-                exerciseList.add(Exercise(final_ex_info[3],final_ex_info[5],final_ex_info[7],final_ex_info[9],final_ex_info[1]))
+                exerciseList.add(Exercise(final_ex_info[3], final_ex_info[5], final_ex_info[7], final_ex_info[9], final_ex_info[1]))
                 final_ex_info.clear()
 
             }
