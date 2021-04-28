@@ -1,4 +1,4 @@
-package com.kernelpanic.sovita.ui.exercise
+package com.kernelpanic.sovita
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -9,27 +9,28 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.kernelpanic.sovita.R
+import com.squareup.picasso.Picasso
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 //Some of this code was obtained from YouTube and other helpful sources
 class WorkoutScreen : AppCompatActivity() {
-    private val START_TIME_IN_MILLIS: Long = 600000
-    private var mTextViewCountDown: TextView? = null
-    private var mButtonStartPause: Button? = null
-    private var mButtonReset: Button? = null
+    private lateinit var mButtonStartPause: Button
+    private lateinit var mButtonPause: Button
     private var mCountDownTimer: CountDownTimer? = null
-    private var mTimerRunning = false
-    private var mTimeLeftInMillis = START_TIME_IN_MILLIS
-    private lateinit var exercises : ArrayList<Exercise>
-    //private lateinit var image : ImageView
-    private lateinit var image : WebView
+    private lateinit var nextButton: Button
+    private lateinit var prevButton: Button
+    private lateinit var image: WebView
 
-    //private lateinit var
+    private lateinit var repTime: TextView
+    private lateinit var exercise_name: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,113 +40,155 @@ class WorkoutScreen : AppCompatActivity() {
 
         val intent = intent
         val workout: Workout = intent.getSerializableExtra("workout2") as Workout //Has the workout
-        val workoutName = workout.getWorkoutName()
+        var workoutName = workout.getWorkoutName()
+
+        //Getting rid of the qoutes
+        workoutName = workoutName.removeRange(0,1)
+        workoutName = workoutName.removeRange(workoutName.length-1,workoutName.length)
+
         val workoutNameDisplay = findViewById<TextView>(R.id.workout_name)
         workoutNameDisplay.text = workoutName
 
-        //println("Workout exercises: " + workout.getExerciseIDs())
-        //println("Reps: " + workout.getExerciseReps())
-        //println("TIme: " + workout.getExerciseTimes())
+        //mTextViewCountDown = findViewById(R.id.text_timer_reps)
+        mButtonStartPause = findViewById(R.id.button_start_pause)
+        mButtonPause = findViewById(R.id.button_reset)
+        nextButton = findViewById(R.id.next)
+        prevButton = findViewById(R.id.back)
+
         image = findViewById(R.id.webView)
         image.settings.setJavaScriptEnabled(true)
+        exercise_name = findViewById(R.id.exerciseName)
+
+        repTime = findViewById(R.id.text_timer_reps)
+
+        var count = 0 //keeps track of what exercise we are on
 
 
-        //Need to get rid of the quotes I don't remember where the quotes are..idk this works though
-        var link = workout.getExerciseImage(0).removeRange(0,1)
-        link = link.removeRange(link.length-1,link.length)
-
+        //Need to get rid of the quotes
+        var link = workout.getExerciseImage(count).removeRange(0, 1)
+        link = link.removeRange(link.length - 1, link.length)
         image.loadUrl(link)
 
+        exercise_name.setText(workout.getExerciseName(count).toString())
+
+        if (workout.getExerciseReps(count) != 0) {
+            repTime.setText(workout.getExerciseReps(count).toString()+ " Reps")
+            mButtonStartPause.visibility = View.INVISIBLE
+            mButtonPause.visibility = View.INVISIBLE
+        } else {
+            if (workout.getExerciseTime(count) < 10) {
+                repTime.setText("0" + workout.getExerciseTime(count).toString() + ":00")
+            } else {
+                repTime.setText(workout.getExerciseTime(count).toString() + ":00")
+            }
+
+            mButtonStartPause.visibility = View.VISIBLE
+            mButtonPause.visibility = View.VISIBLE
+        }
 
 
-        mTextViewCountDown = findViewById(R.id.text_timer_reps)
-        mButtonStartPause = findViewById(R.id.button_start_pause)
-        mButtonReset = findViewById(R.id.button_reset)
+        nextButton.setOnClickListener {
+            count += 1
+            mCountDownTimer?.cancel() //In case the user clicks next before the timer runs out
+            var link = workout.getExerciseImage(count).removeRange(0, 1)
+            link = link.removeRange(link.length - 1, link.length)
+            image.loadUrl(link)
 
-        mButtonStartPause?.run {
-            setOnClickListener {
-                fun onClick() {
-                    if (mTimerRunning) {
-                        pauseTimer()
-                    } else {
-                        startTimer()
-                    }
+            exercise_name.setText(workout.getExerciseName(count).toString())
+
+            if (workout.getExerciseReps(count) != 0) {
+                repTime.setText(workout.getExerciseReps(count).toString() + " Reps")
+                mButtonStartPause.visibility = View.INVISIBLE
+                mButtonPause.visibility = View.INVISIBLE
+            } else {
+                if (workout.getExerciseTime(count) < 10) {
+                    repTime.setText("0" + workout.getExerciseTime(count).toString() + ":00")
+                } else {
+                    repTime.setText(workout.getExerciseTime(count).toString() + ":00")
                 }
+                mButtonStartPause.visibility = View.VISIBLE
+                mButtonPause.visibility = View.VISIBLE
             }
         }
-        mButtonReset?.run {
-            setOnClickListener {
-                fun onClick() {
-                    resetTimer()
+
+        prevButton.setOnClickListener {
+            count = count - 1
+            mCountDownTimer?.cancel() //In case the user clicks prev before the timer runs out
+            var link = workout.getExerciseImage(count).removeRange(0, 1)
+            link = link.removeRange(link.length - 1, link.length)
+            image.loadUrl(link)
+
+            exercise_name.setText(workout.getExerciseName(count).toString())
+
+            if (workout.getExerciseReps(count) != 0) {
+                repTime.setText(workout.getExerciseReps(count).toString() + " Reps")
+                mButtonStartPause.visibility = View.INVISIBLE
+                mButtonPause.visibility = View.INVISIBLE
+                //true
+            } else {
+                if (workout.getExerciseTime(count) < 10) {
+                    repTime.setText("0" + workout.getExerciseTime(count).toString() + ":00")
+                } else {
+                    repTime.setText(workout.getExerciseTime(count).toString() + ":00")
                 }
+                mButtonStartPause.visibility = View.VISIBLE
+                mButtonPause.visibility = View.VISIBLE
             }
         }
-        updateCountDownText()
+
+        var boolPause = false // false means it's not paused
+        var boolStart = false //Means it's starting didn't click reset
+
+        mButtonStartPause.setOnClickListener {
+            if (boolStart == false) {
+                startTimeCounter(repTime,workout.getExerciseTime(count))
+                mButtonStartPause.setText("Reset")
+                if (boolPause == true) {
+                    mButtonPause.setText("Pause")
+                    boolPause = false
+                }
+                boolStart = true
+
+            } else {
+                mCountDownTimer?.cancel()
+                startTimeCounter(repTime,workout.getExerciseTime(count))
+                if (boolPause == true) {
+                    mButtonPause.setText("Pause")
+                    boolPause = false
+                }
+                boolStart = false
+            }
+
+        }
+
+        mButtonPause.setOnClickListener {
+            if (boolPause == false) {
+                mCountDownTimer?.cancel()
+                mButtonPause.setText("Resume")
+                boolPause = true
+            } else {
+                mCountDownTimer?.start()
+                mButtonPause.setText("Pause")
+                boolPause = false
+            }
+
+        }
+
     }
-
-    @SuppressLint("SetTextI18n")
-    fun startTimer() { //start timer
+    fun startTimeCounter(view: TextView, count : Int) {
+        var mTimeLeftInMillis = (count*60000).toLong()
+        //val countTime: TextView = findViewById(R.id.text_timer_reps)
         mCountDownTimer = object : CountDownTimer(mTimeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                mTimeLeftInMillis = millisUntilFinished
-                updateCountDownText()
+                val minutes = (mTimeLeftInMillis / 1000).toInt() / 60
+                val seconds = (mTimeLeftInMillis / 1000).toInt() % 60
+                val timeLeftFormatted: String = java.lang.String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+                view.setText(timeLeftFormatted.toString())
+                mTimeLeftInMillis = mTimeLeftInMillis - 1000
             }
-
-            @SuppressLint("SetTextI18n")
             override fun onFinish() {
-                mTimerRunning = false
-                mButtonStartPause!!.text = "Start"
-                mButtonStartPause!!.visibility = View.INVISIBLE
-                mButtonReset!!.visibility = View.VISIBLE
+                view.setText("Finished")
             }
         }.start()
-        mTimerRunning = true
-        mButtonStartPause!!.text = "pause"
-        mButtonReset!!.visibility = View.INVISIBLE
     }
-
-    @SuppressLint("SetTextI18n")
-    fun pauseTimer() { //pause timer
-        mCountDownTimer!!.cancel()
-        mTimerRunning = false
-        mButtonStartPause!!.text = "Start"
-        mButtonReset!!.visibility = View.VISIBLE
-    }
-
-    fun resetTimer() { //reset timer
-        mTimeLeftInMillis = START_TIME_IN_MILLIS
-        updateCountDownText()
-        mButtonReset!!.visibility = View.INVISIBLE
-        mButtonStartPause!!.visibility = View.VISIBLE
-    }
-
-    fun updateCountDownText() { //updateCountDownText
-        val minutes = (mTimeLeftInMillis / 1000).toInt() / 60
-        val seconds = (mTimeLeftInMillis / 1000).toInt() % 60
-        val timeLeftFormatted: String = java.lang.String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
-        mTextViewCountDown!!.text = timeLeftFormatted
-    }
-
-    private inner class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
-        init {
-            Toast.makeText(applicationContext, "Please wait, it may take a few minute...",     Toast.LENGTH_SHORT).show()
-        }
-        override fun doInBackground(vararg urls: String): Bitmap? {
-            val imageURL = urls[0]
-            var image: Bitmap? = null
-            try {
-                val `in` = java.net.URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-            }
-            catch (e: Exception) {
-                Log.e("Error Message", e.message.toString())
-                e.printStackTrace()
-            }
-            return image
-        }
-        override fun onPostExecute(result: Bitmap?) {
-            imageView.setImageBitmap(result)
-        }
-    }
-
-}//end WorkoutScreen class
+}
