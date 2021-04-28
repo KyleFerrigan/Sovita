@@ -37,7 +37,7 @@ class WorkoutScreen : AppCompatActivity() {
         setContentView(R.layout.activity_workout_screen)
         //setSupportActionBar(findViewById(R.id.toolbar))
 
-
+        //Change
         val intent = intent
         val workout: Workout = intent.getSerializableExtra("workout2") as Workout //Has the workout
         var workoutName = workout.getWorkoutName()
