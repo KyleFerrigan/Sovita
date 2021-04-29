@@ -126,9 +126,9 @@ class ExerciseFragment: Fragment()  {
             for(i in 0..count-1){
                 //println("For loop")
 
-                val name = workoutInfo[nameSlot]
-                name.removeRange(0,1)
-                name.removeRange(name.length-1,name.length)
+                var name = workoutInfo[nameSlot]
+                name = name.removeRange(0,1)
+                name = name.removeRange(name.length-1,name.length)
                 workoutName.add(name)
                 workoutID.add(workoutInfo[idSlot])
                 //println("Name added:" + name)
