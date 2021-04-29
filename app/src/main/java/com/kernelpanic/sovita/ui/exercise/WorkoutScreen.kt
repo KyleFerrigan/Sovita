@@ -1,5 +1,5 @@
 package com.kernelpanic.sovita.ui.exercise
-
+import com.kernelpanic.sovita.ui.exercise.Workout
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
