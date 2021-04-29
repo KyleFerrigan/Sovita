@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sovita"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.exercise.ExerciseBegin2"></activity>
+        <activity android:name=".ui.exercise.WorkoutFinished"></activity>
+        <activity android:name=".ui.exercise.WokroutScreen2" />
+        <activity android:name=".ui.exercise.ExerciseBegin2" />
         <activity android:name=".ui.exercise.StartWorkout" />
         <activity android:name=".ui.exercise.WorkoutScreen" />
         <activity

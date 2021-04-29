@@ -1,4 +1,5 @@
 package com.kernelpanic.sovita.ui.exercise
+import android.content.Intent
 import com.kernelpanic.sovita.ui.exercise.Workout
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -6,6 +7,7 @@ import android.view.View
 import android.webkit.WebView
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.kernelpanic.sovita.MainActivity
 import com.kernelpanic.sovita.R
 import java.util.*
 
@@ -15,8 +17,8 @@ class WorkoutScreen : AppCompatActivity() {
     private lateinit var mButtonStartPause: Button
     private lateinit var mButtonPause: Button
     private var mCountDownTimer: CountDownTimer? = null
-    private lateinit var nextButton: Button
-    private lateinit var prevButton: Button
+    private lateinit var nextButton: ImageButton
+    private lateinit var prevButton: ImageButton
     private lateinit var image: WebView
 
     private lateinit var repTime: TextView
@@ -31,10 +33,6 @@ class WorkoutScreen : AppCompatActivity() {
         val intent = intent
         val workout: Workout = intent.getSerializableExtra("workout2") as Workout //Has the workout
         var workoutName = workout.getWorkoutName()
-
-        //Getting rid of the qoutes
-        workoutName = workoutName.removeRange(0,1)
-        workoutName = workoutName.removeRange(workoutName.length-1,workoutName.length)
 
         val workoutNameDisplay = findViewById<TextView>(R.id.workout_name)
         workoutNameDisplay.text = workoutName
@@ -79,26 +77,33 @@ class WorkoutScreen : AppCompatActivity() {
 
         nextButton.setOnClickListener {
             count += 1
-            mCountDownTimer?.cancel() //In case the user clicks next before the timer runs out
-            var link = workout.getExerciseImage(count).removeRange(0, 1)
-            link = link.removeRange(link.length - 1, link.length)
-            image.loadUrl(link)
 
-            exercise_name.setText(workout.getExerciseName(count).toString())
-
-            if (workout.getExerciseReps(count) != 0) {
-                repTime.setText(workout.getExerciseReps(count).toString() + " Reps")
-                mButtonStartPause.visibility = View.INVISIBLE
-                mButtonPause.visibility = View.INVISIBLE
+            if (count == workout.getNumExercises()) {
+                val intent = Intent(this@WorkoutScreen, WorkoutFinished::class.java)
+                startActivity(intent)
             } else {
-                if (workout.getExerciseTime(count) < 10) {
-                    repTime.setText("0" + workout.getExerciseTime(count).toString() + ":00")
+                mCountDownTimer?.cancel() //In case the user clicks next before the timer runs out
+                var link = workout.getExerciseImage(count).removeRange(0, 1)
+                link = link.removeRange(link.length - 1, link.length)
+                image.loadUrl(link)
+
+                exercise_name.setText(workout.getExerciseName(count).toString())
+
+                if (workout.getExerciseReps(count) != 0) {
+                    repTime.setText(workout.getExerciseReps(count).toString() + " Reps")
+                    mButtonStartPause.visibility = View.INVISIBLE
+                    mButtonPause.visibility = View.INVISIBLE
                 } else {
-                    repTime.setText(workout.getExerciseTime(count).toString() + ":00")
+                    if (workout.getExerciseTime(count) < 10) {
+                        repTime.setText("0" + workout.getExerciseTime(count).toString() + ":00")
+                    } else {
+                        repTime.setText(workout.getExerciseTime(count).toString() + ":00")
+                    }
+                    mButtonStartPause.visibility = View.VISIBLE
+                    mButtonPause.visibility = View.VISIBLE
                 }
-                mButtonStartPause.visibility = View.VISIBLE
-                mButtonPause.visibility = View.VISIBLE
             }
+
         }
 
         prevButton.setOnClickListener {

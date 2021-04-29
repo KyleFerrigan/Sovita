@@ -54,7 +54,7 @@ dependencies {
     //These worked for me --Jessica
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 
     //OKHTTP IMPORTS
