@@ -46,11 +46,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/save_workout"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_check_mark"
+                    android:src="@drawable/ic_check_mark"
                     android:insetRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
