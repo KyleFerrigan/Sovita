@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.kernelpanic.sovita.CustomAdapter
@@ -81,7 +82,7 @@ class NewWorkout : AppCompatActivity() {
     private lateinit var c_adapter: CustomAdapter
 
     private lateinit var workout_name: EditText
-    private lateinit var save_workoutButton: Button
+    private lateinit var save_workoutButton: ImageButton
     private lateinit var exercisesID: ArrayList<String>
     private var workoutID : Int = 0
 
